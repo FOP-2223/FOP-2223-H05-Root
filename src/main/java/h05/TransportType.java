@@ -6,7 +6,11 @@ public enum TransportType {
     public String toNoun(){
         char[] name = this.name().toCharArray();
         for(int i = 0; i < name.length; i++){
-            name[i] = i == 0 ? toUpper(name[i]) : toLower(name[i]);
+            if(isSpecialCharacter(name[i])){
+                name[i] = ' ';
+            }else {
+                name[i] = i == 0 ? toUpper(name[i]) : toLower(name[i]);
+            }
         }
         return new String(name);
     }
@@ -23,5 +27,12 @@ public enum TransportType {
             return (char)(c + 32);
         }
         return c;
+    }
+
+    private boolean isSpecialCharacter(char c){
+        if( (c >= 32 & c <= 47) | (c >= 58 & c <= 64) | (c >= 91 & c <= 96) | (c >= 123 & c <= 126)){
+            return true;
+        }
+        return false;
     }
 }

@@ -33,7 +33,7 @@ public class FuelDrivenVehicle extends MeansOfTransport implements FuelDriven{
         }else if (speed > 200){
             return 20;
         }else{
-            return  10 * speed;
+            return  0.1 * speed;
         }
     }
 
