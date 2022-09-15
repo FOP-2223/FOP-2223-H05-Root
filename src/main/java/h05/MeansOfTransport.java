@@ -1,29 +1,43 @@
 package h05;
 
 abstract public class MeansOfTransport {
-    final private char[] VOCALS = new char[]{'A', 'E', 'I', 'O', 'U'};
+    final private char[] VOWELS = new char[]{'A', 'E', 'I', 'O', 'U'};
 
     protected TransportType transportType;
 
+    /**
+     *
+     * @return the Transport Type of the vehicle
+     */
     TransportType getTransportType(){
         return transportType;
     }
 
+    /**
+     * Drive a predefined distance
+     * @param distance to move
+     * @return the used fuel/charge
+     */
     abstract public int letMeMove(int distance);
 
     @Override
     public String toString() {
         String transportTypeString = transportType == null ? "undefined" : transportType.toNoun();
-        String indefiniteArticle = firstCharIsVocal(transportTypeString) ? "an" : "a";
+        String indefiniteArticle = firstCharIsVowel(transportTypeString) ? "an" : "a";
         return "I am " + indefiniteArticle + " " + transportTypeString + ".";
     }
 
-    private boolean firstCharIsVocal(String s){
+    /**
+     *
+     * @param s Input String
+     * @return true, if the first character of the Input String is a vowel
+     */
+    private boolean firstCharIsVowel(String s){
         if(s.length() < 1){
             return false;
         }
-        for(char vocal : VOCALS) {
-            if(s.charAt(0) == vocal ||s.charAt(0) == vocal + 32){
+        for(char vowel : VOWELS) {
+            if(s.charAt(0) == vowel ||s.charAt(0) == vowel + 32){
                 return true;
             }
         }

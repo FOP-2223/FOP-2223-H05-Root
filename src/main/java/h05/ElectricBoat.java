@@ -16,21 +16,35 @@ public class ElectricBoat extends MeansOfTransport implements ElectricallyDriven
         this.currentCharge = Math.min(this.capacity, Math.max(0,currentCharge));
     }
 
-
+    /**
+     *
+     * @return the current value of specificType
+     */
     public byte getSpecificType() {
         return specificType;
     }
 
+    /**
+     * Sets the specificType of this Object
+     * @param specificType value specificType gets set to
+     * @return value of specificType before
+     */
     public byte setSpecificType(byte specificType){
         byte oldSpecificType = this.specificType;
         this.specificType = (byte)Math.min(30, Math.max(0, specificType));
         return oldSpecificType;
     }
 
+    /**
+     * @return the value of currentCharge
+     */
     public int getCurrentCharge() {
         return currentCharge;
     }
 
+    /**
+     * @return the value of capacity
+     */
     public int getCapacity() {
         return capacity;
     }

@@ -28,18 +28,32 @@ public class HybridType3 implements HybridVehicle{
         return fuelType;
     }
 
+    /**
+     * Setter for fuelType
+     * @param fuelType value to set fuelType to
+     */
     public void setFuelType(FuelType fuelType){
         this.fuelType = fuelType;
     }
 
+    /**
+     * Setter for avergae Consumption
+     * @param averageConsumption value to set averageConsumption to
+     */
     public void setAverageConsumption(double averageConsumption){
         this.averageConsumption = averageConsumption;
     }
 
+    /**
+     * Toggles the value of standardVoltageChargeable
+     */
     public void toggleStandardVoltageChargeable(){
         standardVoltageChargeable = !standardVoltageChargeable;
     }
 
+    /**
+     * Toggles the value of highVoltageChargeable
+     */
     public void toggleHighVoltageChargeable(){
         highVoltageChargeable = !highVoltageChargeable;
     }
@@ -54,6 +68,9 @@ public class HybridType3 implements HybridVehicle{
         return preferredDriveType;
     }
 
+    /**
+     * Toggles the value of prefferedDriveType between ELECTRICAL and FUEL_BASED
+     */
     public void togglePreferredDriveType(){
         preferredDriveType = preferredDriveType == DriveType.ELECTRICAL ? DriveType.FUEL_BASED : DriveType.ELECTRICAL;
     }

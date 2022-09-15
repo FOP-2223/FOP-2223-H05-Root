@@ -27,18 +27,32 @@ public class HybridType1 implements FuelDriven, ElectricallyDriven{
         return fuelType;
     }
 
+    /**
+     * Setter for fuelType
+     * @param fuelType value to set fuelType to
+     */
     public void setFuelType(FuelType fuelType){
         this.fuelType = fuelType;
     }
 
+    /**
+     * Setter for avergae Consumption
+     * @param averageConsumption value to set averageConsumption to
+     */
     public void setAverageConsumption(double averageConsumption){
         this.averageConsumption = averageConsumption;
     }
 
+    /**
+     * Toggles the value of standardVoltageChargeable
+     */
     public void toggleStandardVoltageChargeable(){
         standardVoltageChargeable = !standardVoltageChargeable;
     }
 
+    /**
+     * Toggles the value of highVoltageChargeable
+     */
     public void toggleHighVoltageChargeable(){
         highVoltageChargeable = !highVoltageChargeable;
     }
