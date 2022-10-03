@@ -9,7 +9,7 @@ abstract public class MeansOfTransport {
      *
      * @return the Transport Type of the vehicle
      */
-    TransportType getTransportType(){
+    public TransportType getTransportType(){
         return transportType;
     }
 

@@ -114,9 +114,94 @@ public class H05_RubricProvider implements RubricProvider {
         .build();
 
 
+    public static final Criterion H2_T1 = Criterion.builder()
+        .shortDescription("Das Enum TransportType ist korrekt deklariert.")
+        .grader(
+            Grader.testAwareBuilder()
+                .requirePass(JUnitTestRef.ofMethod(() -> TutorTests_H_2.class.getMethod(
+                    "test_enum")))
+                .pointsPassedMax()
+                .pointsFailedMin()
+                .build())
+        .build();
+
+    public static final Criterion H2_T2 = Criterion.builder()
+        .shortDescription("Die Klasse MeansOfTransport ist korrekt deklariert und abstrakt.")
+        .grader(
+            Grader.testAwareBuilder()
+                .requirePass(JUnitTestRef.ofMethod(() -> TutorTests_H_2.class.getMethod(
+                    "test_class")))
+                .pointsPassedMax()
+                .pointsFailedMin()
+                .build())
+        .build();
+
+    public static final Criterion H2_T3 = Criterion.builder()
+        .shortDescription("Das Attribut transportType ist korrekt deklariert und die Getter-Methode getTransportType ist korrekt umgesetzt.")
+        .grader(
+            Grader.testAwareBuilder()
+                .requirePass(JUnitTestRef.ofMethod(() -> TutorTests_H_2.class.getMethod(
+                    "test_transport_type")))
+                .pointsPassedMax()
+                .pointsFailedMin()
+                .build())
+        .build();
+
+    public static final Criterion H2_T4 = Criterion.builder()
+        .shortDescription("Die Methode letMeMove ist korrekt deklariert und abstrakt.")
+        .grader(
+            Grader.testAwareBuilder()
+                .requirePass(JUnitTestRef.ofMethod(() -> TutorTests_H_2.class.getMethod(
+                    "test_let_me_move")))
+                .pointsPassedMax()
+                .pointsFailedMin()
+                .build())
+        .build();
+
+    public static final Criterion H2_T5 = Criterion.builder()
+        .shortDescription("Die Methode toString funktioniert für einfache Fälle erkennbar korrekt.")
+        .grader(
+            Grader.testAwareBuilder()
+                .requirePass(JUnitTestRef.ofMethod(() -> TutorTests_H_2.class.getMethod(
+                    "test_message_normal")))
+                .pointsPassedMax()
+                .pointsFailedMin()
+                .build())
+        .build();
+
+    public static final Criterion H2_T6 = Criterion.builder()
+        .shortDescription("Die Methode toString funktioniert auch für null erkennbar korrekt.")
+        .grader(
+            Grader.testAwareBuilder()
+                .requirePass(JUnitTestRef.ofMethod(() -> TutorTests_H_2.class.getMethod(
+                    "test_message_undefined")))
+                .pointsPassedMax()
+                .pointsFailedMin()
+                .build())
+        .build();
+
+    public static final Criterion H2_T7 = Criterion.builder()
+        .shortDescription("Die Methode toString funktioniert in allen Fällen erkennbar korrekt.")
+        .grader(
+            Grader.testAwareBuilder()
+                .requirePass(JUnitTestRef.ofMethod(() -> TutorTests_H_2.class.getMethod(
+                    "test_message_article")))
+                .requirePass(JUnitTestRef.ofMethod(() -> TutorTests_H_2.class.getMethod(
+                    "test_message_special_char")))
+                .pointsPassedMax()
+                .pointsFailedMin()
+                .build())
+        .build();
+
+    public static final Criterion H2 = Criterion.builder()
+        .shortDescription("H2 | Klasse MeansOfTransport")
+        .addChildCriteria(H2_T1, H2_T2, H2_T3, H2_T4, H2_T5, H2_T6, H2_T7)
+        .build();
+
+
     public static final Rubric RUBRIC = Rubric.builder()
         .title("H05")
-        .addChildCriteria(H1)
+        .addChildCriteria(H1, H2)
         .build();
 
     @Override

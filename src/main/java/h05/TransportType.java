@@ -1,7 +1,7 @@
 package h05;
 
 public enum TransportType {
-    BIKE, CAR, VESSEL, PLANE;
+    BICYCLE, CAR, VESSEL, PLANE;
 
     public String toNoun(){
         char[] name = this.name().toCharArray();
