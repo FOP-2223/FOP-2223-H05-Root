@@ -114,5 +114,9 @@ public class TutorTests_H_2 {
         }
     }
 
+    @Test
+    public void test_message_only_char(){
+        // TODO
+    }
 
 }

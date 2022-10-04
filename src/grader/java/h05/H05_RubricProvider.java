@@ -164,6 +164,8 @@ public class H05_RubricProvider implements RubricProvider {
             Grader.testAwareBuilder()
                 .requirePass(JUnitTestRef.ofMethod(() -> TutorTests_H_2.class.getMethod(
                     "test_message_normal")))
+                .requirePass(JUnitTestRef.ofMethod(() -> TutorTests_H_2.class.getMethod(
+                    "test_message_only_char")))
                 .pointsPassedMax()
                 .pointsFailedMin()
                 .build())
@@ -175,6 +177,8 @@ public class H05_RubricProvider implements RubricProvider {
             Grader.testAwareBuilder()
                 .requirePass(JUnitTestRef.ofMethod(() -> TutorTests_H_2.class.getMethod(
                     "test_message_undefined")))
+                .requirePass(JUnitTestRef.ofMethod(() -> TutorTests_H_2.class.getMethod(
+                    "test_message_only_char")))
                 .pointsPassedMax()
                 .pointsFailedMin()
                 .build())
@@ -188,6 +192,8 @@ public class H05_RubricProvider implements RubricProvider {
                     "test_message_article")))
                 .requirePass(JUnitTestRef.ofMethod(() -> TutorTests_H_2.class.getMethod(
                     "test_message_special_char")))
+                .requirePass(JUnitTestRef.ofMethod(() -> TutorTests_H_2.class.getMethod(
+                    "test_message_only_char")))
                 .pointsPassedMax()
                 .pointsFailedMin()
                 .build())
@@ -272,9 +278,95 @@ public class H05_RubricProvider implements RubricProvider {
         .addChildCriteria(H3_1_T1, H3_1_T6, H3_1_T2, H3_1_T3, H3_1_T4, H3_1_T5)
         .build();
 
+
+    public static final Criterion H3_2_T1 = Criterion.builder()
+        .shortDescription("Die Klasse ElectricBoat ist korrekt deklariert, erweitert MeansOfTransport und implementiert ElectricallyDriven und IntSupplier.")
+        .grader(
+            Grader.testAwareBuilder()
+                .requirePass(JUnitTestRef.ofMethod(() -> TutorTests_H_3_2.class.getMethod(
+                    "test_class")))
+                .pointsPassedMax()
+                .pointsFailedMin()
+                .build())
+        .build();
+
+    public static final Criterion H3_2_T2 = Criterion.builder()
+        .shortDescription("ElectricBoat besitzt die Attribute specificType, currentCharge und capacity und jeweils eine get-Methode.")
+        .grader(
+            Grader.testAwareBuilder()
+                .requirePass(JUnitTestRef.ofMethod(() -> TutorTests_H_3_2.class.getMethod(
+                    "test_attributes")))
+                .pointsPassedMax()
+                .pointsFailedMin()
+                .build())
+        .build();
+
+    public static final Criterion H3_2_T3 = Criterion.builder()
+        .shortDescription("Die Klasse ElectricBoat setzt die Methoden standardVoltageChargable und highVoltageChargable korrekt um.")
+        .grader(
+            Grader.testAwareBuilder()
+                .requirePass(JUnitTestRef.ofMethod(() -> TutorTests_H_3_2.class.getMethod(
+                    "test_chargeable")))
+                .requirePass(JUnitTestRef.ofMethod(() -> TutorTests_H_3_2.class.getMethod(
+                    "test_chargeable_ternary")))
+                .pointsPassedMax()
+                .pointsFailedMin()
+                .build())
+        .build();
+
+    public static final Criterion H3_2_T4 = Criterion.builder()
+        .shortDescription("Die Klasse ElectricBoat setzt die Methoden letsGo und letMeMove korrekt um.")
+        .grader(
+            Grader.testAwareBuilder()
+                .requirePass(JUnitTestRef.ofMethod(() -> TutorTests_H_3_2.class.getMethod(
+                    "test_letsGo")))
+                .requirePass(JUnitTestRef.ofMethod(() -> TutorTests_H_3_2.class.getMethod(
+                "test_letMeMove")))
+                .pointsPassedMax()
+                .pointsFailedMin()
+                .build())
+        .build();
+
+    public static final Criterion H3_2_T5 = Criterion.builder()
+        .shortDescription("ElectricBoat setzt die Methode getAsInt von IntSupplier korrekt um.")
+        .grader(
+            Grader.testAwareBuilder()
+                .requirePass(JUnitTestRef.ofMethod(() -> TutorTests_H_3_2.class.getMethod(
+                    "test_getAsInt")))
+                .pointsPassedMax()
+                .pointsFailedMin()
+                .build())
+        .build();
+
+    public static final Criterion H3_2_T6 = Criterion.builder()
+        .shortDescription("Die Klasse ElectricBoat setzt die Methode setSpecificType korrekt um.")
+        .grader(
+            Grader.testAwareBuilder()
+                .requirePass(JUnitTestRef.ofMethod(() -> TutorTests_H_3_2.class.getMethod(
+                    "test_setSpecificType")))
+                .requirePass(JUnitTestRef.ofMethod(() -> TutorTests_H_3_2.class.getMethod(
+                    "test_setSpecificType_no_ternary")))
+                .pointsPassedMax()
+                .pointsFailedMin()
+                .build())
+        .build();
+
+    public static final Criterion H3_2_T7 = Criterion.builder()
+        .shortDescription("Der Konstruktor der Klasse ElectricBoat ist korrekt implementiert.")
+        .grader(
+            Grader.testAwareBuilder()
+                .requirePass(JUnitTestRef.ofMethod(() -> TutorTests_H_3_2.class.getMethod(
+                    "test_constructor")))
+                .pointsPassedMax()
+                .pointsFailedMin()
+                .build())
+        .build();
+
+
+
     public static final Criterion H3_2= Criterion.builder()
         .shortDescription("H3.2 | ElectricallyDriven durch ElectricBoat implementieren")
-        .addChildCriteria()
+        .addChildCriteria(H3_2_T1, H3_2_T2, H3_2_T3, H3_2_T4, H3_2_T5, H3_2_T6, H3_2_T7)
         .build();
 
     public static final Criterion H3_3= Criterion.builder()
@@ -289,7 +381,7 @@ public class H05_RubricProvider implements RubricProvider {
 
     public static final Criterion H3 = Criterion.builder()
         .shortDescription("H3 | Abgeleitete / Implementierende Klassen")
-        .addChildCriteria(H3_1)
+        .addChildCriteria(H3_1, H3_2)
         .build();
 
 
