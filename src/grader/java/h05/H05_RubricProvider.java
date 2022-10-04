@@ -199,9 +199,104 @@ public class H05_RubricProvider implements RubricProvider {
         .build();
 
 
+    public static final Criterion H3_1_T1 = Criterion.builder()
+        .shortDescription("Die Klasse FuelDrivenVehicle ist korrekt deklariert, erweitert MeansOfTransport und implementiert FuelDriven.")
+        .grader(
+            Grader.testAwareBuilder()
+                .requirePass(JUnitTestRef.ofMethod(() -> TutorTests_H_3_1.class.getMethod(
+                    "test_class")))
+                .pointsPassedMax()
+                .pointsFailedMin()
+                .build())
+        .build();
+
+    public static final Criterion H3_1_T2 = Criterion.builder()
+        .shortDescription("Das Attribut fuelType der Klasse FuelDrivenVehicle und die dazugehörige Getter-Methode getFuelType sind korrekt.")
+        .grader(
+            Grader.testAwareBuilder()
+                .requirePass(JUnitTestRef.ofMethod(() -> TutorTests_H_3_1.class.getMethod(
+                    "test_getFuelType")))
+                .pointsPassedMax()
+                .pointsFailedMin()
+                .build())
+        .build();
+
+    public static final Criterion H3_1_T3 = Criterion.builder()
+        .shortDescription("Die Methode getAverageConsumption ist korrekt implementiert.")
+        .grader(
+            Grader.testAwareBuilder()
+                .requirePass(JUnitTestRef.ofMethod(() -> TutorTests_H_3_1.class.getMethod(
+                    "test_getAverageConsumption")))
+                .pointsPassedMax()
+                .pointsFailedMin()
+                .build())
+        .build();
+
+    public static final Criterion H3_1_T4 = Criterion.builder()
+        .shortDescription("Das Attribut fillingLevel der Klasse FuelDrivenVehicle, die dazugehörige Getter-Methode getFillingLevel und die Methode fillUp sind korrekt umgesetzt.")
+        .grader(
+            Grader.testAwareBuilder()
+                .requirePass(JUnitTestRef.ofMethod(() -> TutorTests_H_3_1.class.getMethod(
+                    "test_filling")))
+                .pointsPassedMax()
+                .pointsFailedMin()
+                .build())
+        .build();
+
+    public static final Criterion H3_1_T5 = Criterion.builder()
+        .shortDescription("Die Methode letMeMove ist korrekt umgesetzt.")
+        .grader(
+            Grader.testAwareBuilder()
+                .requirePass(JUnitTestRef.ofMethod(() -> TutorTests_H_3_1.class.getMethod(
+                    "test_letMeMove")))
+                .pointsPassedMax()
+                .pointsFailedMin()
+                .build())
+        .build();
+
+    public static final Criterion H3_1_T6 = Criterion.builder()
+        .shortDescription("Der Konstruktor der Klasse FuelDrivenVehicle ist korrekt umgesetzt.")
+        .grader(
+            Grader.testAwareBuilder()
+                .requirePass(JUnitTestRef.ofMethod(() -> TutorTests_H_3_1.class.getMethod(
+                    "test_constructor")))
+                .pointsPassedMax()
+                .pointsFailedMin()
+                .build())
+        .build();
+
+
+
+    public static final Criterion H3_1 = Criterion.builder()
+        .shortDescription("H3.1 | FuelDriven durch FuelDrivenVehicle implementieren")
+        .addChildCriteria(H3_1_T1, H3_1_T6, H3_1_T2, H3_1_T3, H3_1_T4, H3_1_T5)
+        .build();
+
+    public static final Criterion H3_2= Criterion.builder()
+        .shortDescription("H3.2 | ElectricallyDriven durch ElectricBoat implementieren")
+        .addChildCriteria()
+        .build();
+
+    public static final Criterion H3_3= Criterion.builder()
+        .shortDescription("H3.3 | FuelDriven und ElectricallyDriven zugleich implementieren")
+        .addChildCriteria()
+        .build();
+
+    public static final Criterion H3_4= Criterion.builder()
+        .shortDescription("H3.4 | HybridVehicle implementieren")
+        .addChildCriteria()
+        .build();
+
+    public static final Criterion H3 = Criterion.builder()
+        .shortDescription("H3 | Abgeleitete / Implementierende Klassen")
+        .addChildCriteria(H3_1)
+        .build();
+
+
+
     public static final Rubric RUBRIC = Rubric.builder()
         .title("H05")
-        .addChildCriteria(H1, H2)
+        .addChildCriteria(H1, H2, H3)
         .build();
 
     @Override

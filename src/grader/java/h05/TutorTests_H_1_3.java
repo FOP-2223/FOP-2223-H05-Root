@@ -20,7 +20,6 @@ public class TutorTests_H_1_3 {
 
     @Test
     public void test_methods(){
-        H05_Tester.FUEL_DRIVEN_GET_FUEL_TYPE_MT.verify();
-        H05_Tester.FUEL_DRIVEN_GET_AVERAGE_CONSUMPTION_MT.verify();
+        H05_Tester.HYBRID_VEHICLE_GET_PREFERRED_DRIVE_TYPE_MT.verify();
     }
 }

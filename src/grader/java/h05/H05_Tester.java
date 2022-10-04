@@ -52,11 +52,21 @@ public class H05_Tester {
     };
     public static final MethodTester MEANS_OF_TRANSPORT_LET_ME_MOVE_MT = new MethodTester(MEANS_OF_TRANSPORT_CT, "letMeMove", minSim, Modifier.PUBLIC | Modifier.ABSTRACT, int.class, Arrays.asList(MEANS_OF_TRANSPORT_LET_ME_MOVE_PARAMETER_MATCHERS));
     public static final MethodTester MEANS_OF_TRANSPORT_TO_STRING_MT = new MethodTester(MEANS_OF_TRANSPORT_CT, "toString", minSim, Modifier.PUBLIC, String.class);
-    public static final ClassTester<?>  EXTENDED_TRANSPORT_TYPE_CT =  new ClassTester<>("h05", "ExtendedTransportType", minSim, Modifier.PUBLIC | TestUtils.ENUM | Modifier.FINAL);
 
-    public static final MethodTester TRANSPORT_TYPES_VALUES_MT = new MethodTester(TRANSPORT_TYPE_CT, "values", minSim, Modifier.PUBLIC, String[].class);
-
-
-
-
+    // H3.1
+    public static final IdentifierMatcher[] FUEL_DRIVEN_VEHICLE_INTERFACES = {
+        new IdentifierMatcher("FuelDriven", "h05", minSim),
+    };
+    public static final ClassTester<?> FUEL_DRIVEN_VEHICLE_CT =  new ClassTester<>("h05", "FuelDrivenVehicle", minSim, Modifier.PUBLIC, MEANS_OF_TRANSPORT_CT.findClass(), new ArrayList<>(Arrays.asList(FUEL_DRIVEN_VEHICLE_INTERFACES)));
+    public static final AttributeMatcher FUEL_DRIVEN_VEHICLE_FUEL_TYPE_AM = new AttributeMatcher("fuelType", minSim, Modifier.PRIVATE, FUEL_DRIVEN_VEHICLE_CT.findClass());
+    public static final AttributeMatcher FUEL_DRIVEN_VEHICLE_FILLING_LEVEL_AM = new AttributeMatcher("fillingLevel", minSim, Modifier.PRIVATE, int.class);
+    public static final ParameterMatcher [] FUEL_DRIVEN_VEHICLE_FILL_UP_PARAMETER_MATCHERS = {
+        new ParameterMatcher("fillValue", minSim, int.class)
+    };
+    public static final MethodTester FUEL_DRIVEN_VEHICLE_FILL_UP_MT = new MethodTester(FUEL_DRIVEN_VEHICLE_CT, "fillUp", minSim, Modifier.PUBLIC, void.class, Arrays.asList(FUEL_DRIVEN_VEHICLE_FILL_UP_PARAMETER_MATCHERS));
+    public static final ParameterMatcher [] FUEL_DRIVEN_VEHICLE_CONSTRUCTOR_PARAMETER_MATCHERS = {
+        new ParameterMatcher("fuelType", minSim, FUEL_TYPE_CT.findClass()),
+        new ParameterMatcher("transportType", minSim, TRANSPORT_TYPE_CT.findClass()),
+        new ParameterMatcher("fillingLevel", minSim, int.class)
+    };
 }
