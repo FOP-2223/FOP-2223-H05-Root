@@ -1,8 +1,11 @@
 package h05;
 
-import org.sourcegrade.jagr.api.rubric.*;
+import org.sourcegrade.jagr.api.rubric.Criterion;
+import org.sourcegrade.jagr.api.rubric.Grader;
+import org.sourcegrade.jagr.api.rubric.JUnitTestRef;
+import org.sourcegrade.jagr.api.rubric.Rubric;
+import org.sourcegrade.jagr.api.rubric.RubricProvider;
 
-@RubricForSubmission("h05")
 public class H05_RubricProvider implements RubricProvider {
     public static final Criterion H1_1_T1 = Criterion.builder()
         .shortDescription("Das Interface ElectricallyDriven ist korrekt deklariert.")

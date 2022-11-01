@@ -3,7 +3,7 @@ package h05;
 import org.junit.jupiter.api.Test;
 import org.sourcegrade.jagr.api.rubric.TestForSubmission;
 
-@TestForSubmission("h05")
+@TestForSubmission
 public class TutorTests_H_1_3 {
 
     @Test

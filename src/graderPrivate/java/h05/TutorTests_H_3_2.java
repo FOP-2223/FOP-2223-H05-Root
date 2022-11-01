@@ -5,12 +5,11 @@ import org.sourcegrade.jagr.api.rubric.TestForSubmission;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
-import java.util.Arrays;
 import java.util.function.IntSupplier;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.*;
 
-@TestForSubmission("h05")
+@TestForSubmission
 public class TutorTests_H_3_2 {
 
     @Test
