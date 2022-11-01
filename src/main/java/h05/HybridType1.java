@@ -1,6 +1,6 @@
 package h05;
 
-public class HybridType1 implements FuelDriven, ElectricallyDriven{
+public class HybridType1 implements FuelDriven, ElectricallyDriven {
 
     private static FuelType fuelType;
     private static double averageConsumption;
@@ -29,32 +29,11 @@ public class HybridType1 implements FuelDriven, ElectricallyDriven{
 
     /**
      * Setter for fuelType
+     *
      * @param fuelType value to set fuelType to
      */
-    public void setFuelType(FuelType fuelType){
+    public void setFuelType(FuelType fuelType) {
         this.fuelType = fuelType;
-    }
-
-    /**
-     * Setter for avergae Consumption
-     * @param averageConsumption value to set averageConsumption to
-     */
-    public void setAverageConsumption(double averageConsumption){
-        this.averageConsumption = averageConsumption;
-    }
-
-    /**
-     * Toggles the value of standardVoltageChargeable
-     */
-    public void toggleStandardVoltageChargeable(){
-        standardVoltageChargeable = !standardVoltageChargeable;
-    }
-
-    /**
-     * Toggles the value of highVoltageChargeable
-     */
-    public void toggleHighVoltageChargeable(){
-        highVoltageChargeable = !highVoltageChargeable;
     }
 
     @Override
@@ -62,4 +41,26 @@ public class HybridType1 implements FuelDriven, ElectricallyDriven{
         return averageConsumption;
     }
 
+    /**
+     * Setter for avergae Consumption
+     *
+     * @param averageConsumption value to set averageConsumption to
+     */
+    public void setAverageConsumption(double averageConsumption) {
+        this.averageConsumption = averageConsumption;
+    }
+
+    /**
+     * Toggles the value of standardVoltageChargeable
+     */
+    public void toggleStandardVoltageChargeable() {
+        standardVoltageChargeable = !standardVoltageChargeable;
+    }
+
+    /**
+     * Toggles the value of highVoltageChargeable
+     */
+    public void toggleHighVoltageChargeable() {
+        highVoltageChargeable = !highVoltageChargeable;
+    }
 }

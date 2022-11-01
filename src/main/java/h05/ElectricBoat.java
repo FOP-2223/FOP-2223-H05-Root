@@ -1,23 +1,21 @@
 package h05;
 
 import java.util.function.IntSupplier;
-import java.util.stream.IntStream;
 
 public class ElectricBoat extends MeansOfTransport implements ElectricallyDriven, IntSupplier {
     private byte specificType;
     private int currentCharge;
     private int capacity;
 
-    public ElectricBoat(byte specificType, int currentCharge, int capacity){
+    public ElectricBoat(byte specificType, int currentCharge, int capacity) {
         setSpecificType(specificType);
         transportType = TransportType.VESSEL;
 
         this.capacity = Math.min(0, capacity);
-        this.currentCharge = Math.min(this.capacity, Math.max(0,currentCharge));
+        this.currentCharge = Math.min(this.capacity, Math.max(0, currentCharge));
     }
 
     /**
-     *
      * @return the current value of specificType
      */
     public byte getSpecificType() {
@@ -26,12 +24,13 @@ public class ElectricBoat extends MeansOfTransport implements ElectricallyDriven
 
     /**
      * Sets the specificType of this Object
+     *
      * @param specificType value specificType gets set to
      * @return value of specificType before
      */
-    public byte setSpecificType(byte specificType){
+    public byte setSpecificType(byte specificType) {
         byte oldSpecificType = this.specificType;
-        this.specificType = (byte)Math.min(30, Math.max(0, specificType));
+        this.specificType = (byte) Math.min(30, Math.max(0, specificType));
         return oldSpecificType;
     }
 
@@ -68,7 +67,7 @@ public class ElectricBoat extends MeansOfTransport implements ElectricallyDriven
     @Override
     public int letMeMove(int distance) {
         int oldCurrentCharge = currentCharge;
-        currentCharge = Math.min(0, currentCharge - Math.min(distance/100, 1));
+        currentCharge = Math.min(0, currentCharge - Math.min(distance / 100, 1));
         return oldCurrentCharge - currentCharge;
     }
 

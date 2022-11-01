@@ -110,12 +110,10 @@ public class H05_RubricProvider implements RubricProvider {
         .addChildCriteria(H1_3_T1, H1_3_T2, H1_3_T3)
         .build();
 
-
     public static final Criterion H1 = Criterion.builder()
         .shortDescription("H1 | Drei Interfaces")
         .addChildCriteria(H1_1, H1_2, H1_3)
         .build();
-
 
     public static final Criterion H2_T1 = Criterion.builder()
         .shortDescription("Das Enum TransportType ist korrekt deklariert.")
@@ -207,7 +205,6 @@ public class H05_RubricProvider implements RubricProvider {
         .addChildCriteria(H2_T1, H2_T2, H2_T3, H2_T4, H2_T5, H2_T6, H2_T7)
         .build();
 
-
     public static final Criterion H3_1_T1 = Criterion.builder()
         .shortDescription("Die Klasse FuelDrivenVehicle ist korrekt deklariert, erweitert MeansOfTransport und implementiert FuelDriven.")
         .grader(
@@ -274,13 +271,10 @@ public class H05_RubricProvider implements RubricProvider {
                 .build())
         .build();
 
-
-
     public static final Criterion H3_1 = Criterion.builder()
         .shortDescription("H3.1 | FuelDriven durch FuelDrivenVehicle implementieren")
         .addChildCriteria(H3_1_T1, H3_1_T6, H3_1_T2, H3_1_T3, H3_1_T4, H3_1_T5)
         .build();
-
 
     public static final Criterion H3_2_T1 = Criterion.builder()
         .shortDescription("Die Klasse ElectricBoat ist korrekt deklariert, erweitert MeansOfTransport und implementiert ElectricallyDriven und IntSupplier.")
@@ -324,7 +318,7 @@ public class H05_RubricProvider implements RubricProvider {
                 .requirePass(JUnitTestRef.ofMethod(() -> TutorTests_H_3_2.class.getMethod(
                     "test_letsGo")))
                 .requirePass(JUnitTestRef.ofMethod(() -> TutorTests_H_3_2.class.getMethod(
-                "test_letMeMove")))
+                    "test_letMeMove")))
                 .pointsPassedMax()
                 .pointsFailedMin()
                 .build())
@@ -365,19 +359,17 @@ public class H05_RubricProvider implements RubricProvider {
                 .build())
         .build();
 
-
-
-    public static final Criterion H3_2= Criterion.builder()
+    public static final Criterion H3_2 = Criterion.builder()
         .shortDescription("H3.2 | ElectricallyDriven durch ElectricBoat implementieren")
         .addChildCriteria(H3_2_T1, H3_2_T2, H3_2_T3, H3_2_T4, H3_2_T5, H3_2_T6, H3_2_T7)
         .build();
 
-    public static final Criterion H3_3= Criterion.builder()
+    public static final Criterion H3_3 = Criterion.builder()
         .shortDescription("H3.3 | FuelDriven und ElectricallyDriven zugleich implementieren")
         .addChildCriteria()
         .build();
 
-    public static final Criterion H3_4= Criterion.builder()
+    public static final Criterion H3_4 = Criterion.builder()
         .shortDescription("H3.4 | HybridVehicle implementieren")
         .addChildCriteria()
         .build();
@@ -386,9 +378,6 @@ public class H05_RubricProvider implements RubricProvider {
         .shortDescription("H3 | Abgeleitete / Implementierende Klassen")
         .addChildCriteria(H3_1, H3_2)
         .build();
-
-
-
     public static final Rubric RUBRIC = Rubric.builder()
         .title("H05")
         .addChildCriteria(H1, H2, H3)

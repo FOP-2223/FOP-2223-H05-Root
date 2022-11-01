@@ -18,29 +18,28 @@ import static org.junit.jupiter.api.Assertions.*;
 public class TutorTests_H_3_1 {
 
     @Test
-    public void test_class(){
+    public void test_class() {
         H05_Tester.FUEL_DRIVEN_VEHICLE_CT.verify();
     }
 
     @Test
-    public void test_getFuelType(){
+    public void test_getFuelType() {
         Field fuel_type_field = H05_Tester.FUEL_DRIVEN_VEHICLE_CT.resolve().resolveAttribute(H05_Tester.FUEL_DRIVEN_VEHICLE_FUEL_TYPE_AM);
         H05_Tester.FUEL_DRIVEN_VEHICLE_CT.resolve().assertHasGetter(fuel_type_field);
     }
 
-
     private void test_getAverageConsumption(int speed) throws InvocationTargetException, IllegalAccessException {
         final double EPSILON = 0.0001;
         Object instance = H05_Tester.FUEL_DRIVEN_VEHICLE_CT.resolve().getNewRealInstance();
-        double actual_consumption = (double)H05_Tester.FUEL_DRIVEN_GET_AVERAGE_CONSUMPTION_MT.resolveMethod().invoke(instance, speed);
+        double actual_consumption = (double) H05_Tester.FUEL_DRIVEN_GET_AVERAGE_CONSUMPTION_MT.resolveMethod().invoke(instance, speed);
         double expected_consumption = Math.max(0, Math.min(0.1 * speed, 20));
-        assertEquals(expected_consumption, actual_consumption, EPSILON,"Rückgabewert von getAverageConsumption nicht korrekt!");
+        assertEquals(expected_consumption, actual_consumption, EPSILON, "Rückgabewert von getAverageConsumption nicht korrekt!");
     }
 
     @Test
-    public void test_getAverageConsumption() throws InvocationTargetException, IllegalAccessException{
+    public void test_getAverageConsumption() throws InvocationTargetException, IllegalAccessException {
         int[] testvec = new int[]{-10, 0, 2, 50, 200, 1000};
-        for(int testcase : testvec) {
+        for (int testcase : testvec) {
             test_getAverageConsumption(testcase);
         }
     }
@@ -51,7 +50,7 @@ public class TutorTests_H_3_1 {
         int filling_level_before = ThreadLocalRandom.current().nextInt();
         H05_Tester.FUEL_DRIVEN_VEHICLE_CT.resolve().setField(instance, filling_level_field, filling_level_before);
         H05_Tester.FUEL_DRIVEN_VEHICLE_FILL_UP_MT.resolveMethod().invoke(instance, fillValue);
-        int filling_level_after = (int)H05_Tester.FUEL_DRIVEN_VEHICLE_CT.resolve().getFieldValue(instance, filling_level_field);
+        int filling_level_after = (int) H05_Tester.FUEL_DRIVEN_VEHICLE_CT.resolve().getFieldValue(instance, filling_level_field);
         assertEquals(filling_level_before + Math.max(0, fillValue), filling_level_after, "Methode fillUp funktioniert nicht korrekt");
     }
 
@@ -63,7 +62,7 @@ public class TutorTests_H_3_1 {
 
         //Fill UP
         int[] testvec = new int[]{-10, 10, 100, 0};
-        for(int testcase : testvec){
+        for (int testcase : testvec) {
             test_fill_up(testcase);
         }
     }
@@ -74,26 +73,26 @@ public class TutorTests_H_3_1 {
         int filling_level_before = 10;
         H05_Tester.FUEL_DRIVEN_VEHICLE_CT.resolve().setField(instance, filling_level_field, filling_level_before);
 
-        int returned_value = (int)H05_Tester.MEANS_OF_TRANSPORT_LET_ME_MOVE_MT.resolveMethod().invoke(instance, distance);
-        int actual_filling_level_after = (int)H05_Tester.FUEL_DRIVEN_VEHICLE_CT.resolve().getFieldValue(instance, filling_level_field);
+        int returned_value = (int) H05_Tester.MEANS_OF_TRANSPORT_LET_ME_MOVE_MT.resolveMethod().invoke(instance, distance);
+        int actual_filling_level_after = (int) H05_Tester.FUEL_DRIVEN_VEHICLE_CT.resolve().getFieldValue(instance, filling_level_field);
 
         int reduceBy;
-        if(distance < 0){
+        if (distance < 0) {
             reduceBy = 0;
-        }else if(distance < 10 * filling_level_before){
-            reduceBy = distance/10;
-        }else{
+        } else if (distance < 10 * filling_level_before) {
+            reduceBy = distance / 10;
+        } else {
             reduceBy = filling_level_before;
         }
 
-        assertEquals(filling_level_before-reduceBy, actual_filling_level_after, "Methode letMeMove reduziert fillingLevel nicht korrekt");
-        assertEquals(reduceBy/10, returned_value, "Der Rückgabewert der Methode letMeMove ist nicht korrekt!");
+        assertEquals(filling_level_before - reduceBy, actual_filling_level_after, "Methode letMeMove reduziert fillingLevel nicht korrekt");
+        assertEquals(reduceBy / 10, returned_value, "Der Rückgabewert der Methode letMeMove ist nicht korrekt!");
     }
 
     @Test
     public void test_letMeMove() throws InvocationTargetException, IllegalAccessException {
         int[] testvec = new int[]{-100, 0, 10, 50, 200};
-        for(int testcase : testvec){
+        for (int testcase : testvec) {
             test_letMeMove(testcase);
         }
     }
@@ -134,13 +133,12 @@ public class TutorTests_H_3_1 {
 
     @Test
     public void test_constructor() throws Throwable {
-        int[][] testvec = new int[][] {
+        int[][] testvec = new int[][]{
             {0, 1, 10},
             {1, 0, 999}
         };
-        for (int[] testcase : testvec){
+        for (int[] testcase : testvec) {
             test_constructor(testcase[0], testcase[1], testcase[2]);
         }
     }
-
 }

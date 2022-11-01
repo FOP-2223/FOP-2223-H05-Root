@@ -6,15 +6,15 @@ abstract public class MeansOfTransport {
     protected TransportType transportType;
 
     /**
-     *
      * @return the Transport Type of the vehicle
      */
-    public TransportType getTransportType(){
+    public TransportType getTransportType() {
         return transportType;
     }
 
     /**
      * Drive a predefined distance
+     *
      * @param distance to move
      * @return the used fuel/charge
      */
@@ -28,16 +28,15 @@ abstract public class MeansOfTransport {
     }
 
     /**
-     *
      * @param s Input String
      * @return true, if the first character of the Input String is a vowel
      */
-    private boolean firstCharIsVowel(String s){
-        if(s.length() < 1){
+    private boolean firstCharIsVowel(String s) {
+        if (s.length() < 1) {
             return false;
         }
-        for(char vowel : VOWELS) {
-            if(s.charAt(0) == vowel ||s.charAt(0) == vowel + 32){
+        for (char vowel : VOWELS) {
+            if (s.charAt(0) == vowel || s.charAt(0) == vowel + 32) {
                 return true;
             }
         }

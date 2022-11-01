@@ -1,8 +1,12 @@
 package h05;
 
-public class HybridType2 extends MeansOfTransport implements FuelDriven, ElectricallyDriven{
+public class HybridType2 extends MeansOfTransport implements FuelDriven, ElectricallyDriven {
 
     private HybridType1 hybridObject;
+
+    HybridType2() {
+        hybridObject = new HybridType1();
+    }
 
     @Override
     public boolean standardVoltageChargeable() {
@@ -32,9 +36,5 @@ public class HybridType2 extends MeansOfTransport implements FuelDriven, Electri
     @Override
     public int letMeMove(int distance) {
         return 0;
-    }
-
-    HybridType2(){
-        hybridObject = new HybridType1();
     }
 }

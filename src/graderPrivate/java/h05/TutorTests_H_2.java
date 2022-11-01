@@ -16,34 +16,34 @@ import static org.junit.jupiter.api.Assertions.*;
 public class TutorTests_H_2 {
 
     @Test
-    public void test_enum(){
+    public void test_enum() {
         H05_Tester.TRANSPORT_TYPE_CT.verify();
         String[] enum_constants = {"BICYCLE", "CAR", "VESSEL", "PLANE"};
         H05_Tester.TRANSPORT_TYPE_CT.assertEnumConstants(enum_constants);
     }
 
     @Test
-    public void test_class(){
+    public void test_class() {
         H05_Tester.MEANS_OF_TRANSPORT_CT.verify();
         // TODO: check Constructor
     }
 
     @Test
-    public void test_transport_type(){
+    public void test_transport_type() {
         Field transport_type_field = H05_Tester.MEANS_OF_TRANSPORT_CT.resolve().resolveAttribute(H05_Tester.MEANS_OF_TRANSPORT_TRANSPORT_TYPE_AM);
         H05_Tester.MEANS_OF_TRANSPORT_CT.resolve().assertHasGetter(transport_type_field);
     }
 
     @Test
-    public void test_let_me_move(){
+    public void test_let_me_move() {
         H05_Tester.MEANS_OF_TRANSPORT_LET_ME_MOVE_MT.verify();
     }
 
-    private void check_message(String name) throws Throwable{
+    private void check_message(String name) throws Throwable {
         check_message(name, false);
     }
 
-    private void check_message(String name, boolean identical)throws Throwable{
+    private void check_message(String name, boolean identical) throws Throwable {
 
         Class transportTypeClass = H05_Tester.TRANSPORT_TYPE_CT.getTheClass();
         Constructor c = transportTypeClass.getDeclaredConstructor(String.class, int.class);
@@ -57,7 +57,7 @@ public class TutorTests_H_2 {
 
         String s = null;
         try {
-            s = (String)H05_Tester.MEANS_OF_TRANSPORT_TO_STRING_MT.resolveMethod().invoke(obj ,null);
+            s = (String) H05_Tester.MEANS_OF_TRANSPORT_TO_STRING_MT.resolveMethod().invoke(obj, null);
         } catch (IllegalAccessException e) {
             e.printStackTrace();
         } catch (InvocationTargetException e) {
@@ -67,23 +67,22 @@ public class TutorTests_H_2 {
         assertEquals(MessageHelper_H_2.match_format(MessageHelper_H_2.expected_name(name)), actual);
     }
 
-
     @Test
-    public void test_message_normal() throws Throwable{
+    public void test_message_normal() throws Throwable {
         String[] testvec = {"towel", "showel", "hovercraft"};
-        for(String testcase : testvec) {
+        for (String testcase : testvec) {
             check_message(testcase);
         }
     }
 
     @Test
-    public void test_message_undefined(){
+    public void test_message_undefined() {
         Field transport_type_field = H05_Tester.MEANS_OF_TRANSPORT_CT.resolve().resolveAttribute(H05_Tester.MEANS_OF_TRANSPORT_TRANSPORT_TYPE_AM);
         var obj = H05_Tester.MEANS_OF_TRANSPORT_CT.getNewRealInstance();
         H05_Tester.MEANS_OF_TRANSPORT_CT.resolve().setField(obj, transport_type_field, null);
         String s = null;
         try {
-            s = (String)H05_Tester.MEANS_OF_TRANSPORT_TO_STRING_MT.resolveMethod().invoke( obj,null);
+            s = (String) H05_Tester.MEANS_OF_TRANSPORT_TO_STRING_MT.resolveMethod().invoke(obj, null);
         } catch (IllegalAccessException e) {
             e.printStackTrace();
         } catch (InvocationTargetException e) {
@@ -95,24 +94,23 @@ public class TutorTests_H_2 {
     }
 
     @Test
-    public void test_message_article() throws Throwable{
+    public void test_message_article() throws Throwable {
         String[] testvec = {"towel", "showel", "hovercraft", "unimog", "apple"};
-        for(String testcase : testvec) {
+        for (String testcase : testvec) {
             check_message(testcase, true);
         }
     }
 
     @Test
-    public void test_message_special_char() throws Throwable{
+    public void test_message_special_char() throws Throwable {
         String[] testvec = {"elephan%$t", "st(i)ck"};
-        for(String testcase : testvec) {
+        for (String testcase : testvec) {
             check_message(testcase);
         }
     }
 
     @Test
-    public void test_message_only_char(){
+    public void test_message_only_char() {
         // TODO
     }
-
 }

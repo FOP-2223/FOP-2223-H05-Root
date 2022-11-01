@@ -5,5 +5,4 @@ import org.sourcegrade.jagr.api.rubric.TestForSubmission;
 @TestForSubmission
 public class TutorTests_H_3_4 {
 
-
 }
