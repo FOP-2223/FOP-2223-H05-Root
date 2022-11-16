@@ -17,26 +17,27 @@ public class TutorTests_H_2 {
 
     @Test
     public void test_enum() {
-        H05_Tester.TRANSPORT_TYPE_CT.verify();
+        H05_Tester.TRANSPORT_TYPE_CT.get().verify();
         String[] enum_constants = {"BICYCLE", "CAR", "VESSEL", "PLANE"};
-        H05_Tester.TRANSPORT_TYPE_CT.assertEnumConstants(enum_constants);
+        H05_Tester.TRANSPORT_TYPE_CT.get().assertEnumConstants(enum_constants);
     }
 
     @Test
     public void test_class() {
-        H05_Tester.MEANS_OF_TRANSPORT_CT.verify();
+        H05_Tester.MEANS_OF_TRANSPORT_CT.get().verify();
         // TODO: check Constructor
     }
 
     @Test
     public void test_transport_type() {
-        Field transport_type_field = H05_Tester.MEANS_OF_TRANSPORT_CT.resolve().resolveAttribute(H05_Tester.MEANS_OF_TRANSPORT_TRANSPORT_TYPE_AM);
-        H05_Tester.MEANS_OF_TRANSPORT_CT.resolve().assertHasGetter(transport_type_field);
+        Field transport_type_field =
+            H05_Tester.MEANS_OF_TRANSPORT_CT.get().resolve().resolveAttribute(H05_Tester.MEANS_OF_TRANSPORT_TRANSPORT_TYPE_AM.get());
+        H05_Tester.MEANS_OF_TRANSPORT_CT.get().resolve().assertHasGetter(transport_type_field);
     }
 
     @Test
     public void test_let_me_move() {
-        H05_Tester.MEANS_OF_TRANSPORT_LET_ME_MOVE_MT.verify();
+        H05_Tester.MEANS_OF_TRANSPORT_LET_ME_MOVE_MT.get().verify();
     }
 
     private void check_message(String name) throws Throwable {
@@ -45,19 +46,20 @@ public class TutorTests_H_2 {
 
     private void check_message(String name, boolean identical) throws Throwable {
 
-        Class transportTypeClass = H05_Tester.TRANSPORT_TYPE_CT.getTheClass();
+        Class transportTypeClass = H05_Tester.TRANSPORT_TYPE_CT.get().getTheClass();
         Constructor c = transportTypeClass.getDeclaredConstructor(String.class, int.class);
         c.setAccessible(true);
         MethodHandle h = MethodHandles.lookup().unreflectConstructor(c);
         Object t = transportTypeClass.cast(h.invoke(name, 357));
 
-        Field transport_type_field = H05_Tester.MEANS_OF_TRANSPORT_CT.resolve().resolveAttribute(H05_Tester.MEANS_OF_TRANSPORT_TRANSPORT_TYPE_AM);
-        var obj = H05_Tester.MEANS_OF_TRANSPORT_CT.getNewRealInstance();
-        H05_Tester.MEANS_OF_TRANSPORT_CT.resolve().setField(obj, transport_type_field, t);
+        Field transport_type_field =
+            H05_Tester.MEANS_OF_TRANSPORT_CT.get().resolve().resolveAttribute(H05_Tester.MEANS_OF_TRANSPORT_TRANSPORT_TYPE_AM.get());
+        var obj = H05_Tester.MEANS_OF_TRANSPORT_CT.get().getNewRealInstance();
+        H05_Tester.MEANS_OF_TRANSPORT_CT.get().resolve().setField(obj, transport_type_field, t);
 
         String s = null;
         try {
-            s = (String) H05_Tester.MEANS_OF_TRANSPORT_TO_STRING_MT.resolveMethod().invoke(obj, null);
+            s = (String) H05_Tester.MEANS_OF_TRANSPORT_TO_STRING_MT.get().resolveMethod().invoke(obj, null);
         } catch (IllegalAccessException e) {
             e.printStackTrace();
         } catch (InvocationTargetException e) {
@@ -77,12 +79,13 @@ public class TutorTests_H_2 {
 
     @Test
     public void test_message_undefined() {
-        Field transport_type_field = H05_Tester.MEANS_OF_TRANSPORT_CT.resolve().resolveAttribute(H05_Tester.MEANS_OF_TRANSPORT_TRANSPORT_TYPE_AM);
-        var obj = H05_Tester.MEANS_OF_TRANSPORT_CT.getNewRealInstance();
-        H05_Tester.MEANS_OF_TRANSPORT_CT.resolve().setField(obj, transport_type_field, null);
+        Field transport_type_field =
+            H05_Tester.MEANS_OF_TRANSPORT_CT.get().resolve().resolveAttribute(H05_Tester.MEANS_OF_TRANSPORT_TRANSPORT_TYPE_AM.get());
+        var obj = H05_Tester.MEANS_OF_TRANSPORT_CT.get().getNewRealInstance();
+        H05_Tester.MEANS_OF_TRANSPORT_CT.get().resolve().setField(obj, transport_type_field, null);
         String s = null;
         try {
-            s = (String) H05_Tester.MEANS_OF_TRANSPORT_TO_STRING_MT.resolveMethod().invoke(obj, null);
+            s = (String) H05_Tester.MEANS_OF_TRANSPORT_TO_STRING_MT.get().resolveMethod().invoke(obj, null);
         } catch (IllegalAccessException e) {
             e.printStackTrace();
         } catch (InvocationTargetException e) {

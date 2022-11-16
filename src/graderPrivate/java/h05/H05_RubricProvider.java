@@ -76,7 +76,7 @@ public class H05_RubricProvider implements RubricProvider {
         .shortDescription("Das Enum DriveType ist korrekt.")
         .grader(
             Grader.testAwareBuilder()
-                .requirePass(JUnitTestRef.ofMethod(() -> TutorTests_H_1_2.class.getMethod(
+                .requirePass(JUnitTestRef.ofMethod(() -> TutorTests_H_1_3.class.getMethod(
                     "test_enum")))
                 .pointsPassedMax()
                 .pointsFailedMin()
@@ -87,7 +87,7 @@ public class H05_RubricProvider implements RubricProvider {
         .shortDescription("Das Interface HybridVehicle ist korrekt deklariert.")
         .grader(
             Grader.testAwareBuilder()
-                .requirePass(JUnitTestRef.ofMethod(() -> TutorTests_H_1_2.class.getMethod(
+                .requirePass(JUnitTestRef.ofMethod(() -> TutorTests_H_1_3.class.getMethod(
                     "test_interface")))
                 .pointsPassedMax()
                 .pointsFailedMin()
@@ -98,7 +98,7 @@ public class H05_RubricProvider implements RubricProvider {
         .shortDescription("Die Methode getPreferredDriveType ist korrekt deklariert.")
         .grader(
             Grader.testAwareBuilder()
-                .requirePass(JUnitTestRef.ofMethod(() -> TutorTests_H_1_2.class.getMethod(
+                .requirePass(JUnitTestRef.ofMethod(() -> TutorTests_H_1_3.class.getMethod(
                     "test_methods")))
                 .pointsPassedMax()
                 .pointsFailedMin()
