@@ -17,9 +17,9 @@ public class TutorTests_H_2 {
 
     @Test
     public void test_enum() {
-        H05_Tester.TRANSPORT_TYPE_CT.get().verify();
-        String[] enum_constants = {"BICYCLE", "CAR", "VESSEL", "PLANE"};
-        H05_Tester.TRANSPORT_TYPE_CT.get().assertEnumConstants(enum_constants);
+        H05_Tester.TRANSPORT_TYPE_CT.verify();
+        String[] enum_constants = {"BICYCLE", "CAR", "VESSEL", "AIRCRAFT"};
+        H05_Tester.TRANSPORT_TYPE_CT.assertEnumConstants(enum_constants);
     }
 
     @Test

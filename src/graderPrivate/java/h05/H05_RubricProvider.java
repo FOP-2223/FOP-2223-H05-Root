@@ -364,19 +364,122 @@ public class H05_RubricProvider implements RubricProvider {
         .addChildCriteria(H3_2_T1, H3_2_T2, H3_2_T3, H3_2_T4, H3_2_T5, H3_2_T6, H3_2_T7)
         .build();
 
+
+    public static final Criterion H3_3_T1 = Criterion.builder()
+        .shortDescription("Die Klasse HybridType ist erkennbar korrekt definiert und implementiert FuelDriven und ElectricallyDriven")
+        .grader(
+            Grader.testAwareBuilder()
+                .requirePass(JUnitTestRef.ofMethod(() -> TutorTests_H_3_3.class.getMethod(
+                    "test_HybridType1_class")))
+                .pointsPassedMax()
+                .pointsFailedMin()
+                .build())
+        .build();
+
+    public static final Criterion H3_3_T2 = Criterion.builder()
+        .shortDescription("Die Attribute von Klasse HybridType1 sind korrekt als Klassenattribute deklariert.")
+        .grader(
+            Grader.testAwareBuilder()
+                .requirePass(JUnitTestRef.ofMethod(() -> TutorTests_H_3_3.class.getMethod(
+                    "test_HybridType1_attributes")))
+                .pointsPassedMax()
+                .pointsFailedMin()
+                .build())
+        .build();
+
+    public static final Criterion H3_3_T3 = Criterion.builder()
+        .shortDescription("Alle zu implementierenden Methoden sind korrekt umgesetzt.")
+        .grader(
+            Grader.testAwareBuilder()
+                .requirePass(JUnitTestRef.ofMethod(() -> TutorTests_H_3_3.class.getMethod(
+                    "test_HybridType1_get_set")))
+                .pointsPassedMax()
+                .pointsFailedMin()
+                .build())
+        .build();
+
+    public static final Criterion H3_3_T4 = Criterion.builder()
+        .shortDescription("Die Klasse HybridType2 ist korrekt deklariert, erweitert MeansOfTransport und implementiert FuelDriven und ElectricallyDriven.")
+        .grader(
+            Grader.testAwareBuilder()
+                .requirePass(JUnitTestRef.ofMethod(() -> TutorTests_H_3_3.class.getMethod(
+                    "test_HybridType2_class")))
+                .pointsPassedMax()
+                .pointsFailedMin()
+                .build())
+        .build();
+
+    public static final Criterion H3_3_T5 = Criterion.builder()
+        .shortDescription("Die Klasse HybridType2 besitzt ein Object hybridObject von Typ HybridType1 und erzeugt dieses im Konstruktor.")
+        .grader(
+            Grader.testAwareBuilder()
+                .requirePass(JUnitTestRef.ofMethod(() -> TutorTests_H_3_3.class.getMethod(
+                    "test_HybridType2_hybrid_Object")))
+                .pointsPassedMax()
+                .pointsFailedMin()
+                .build())
+        .build();
+
+    public static final Criterion H3_3_T6 = Criterion.builder()
+        .shortDescription("Alle zu implementierenden Methoden funktionieren korrekt und leiten die Aufrufe an hybridObject weiter.")
+        .grader(
+            Grader.testAwareBuilder()
+                .requirePass(JUnitTestRef.ofMethod(() -> TutorTests_H_3_3.class.getMethod(
+                    "test_HybridType2_forwarding")))
+                .pointsPassedMax()
+                .pointsFailedMin()
+                .build())
+        .build();
+
     public static final Criterion H3_3 = Criterion.builder()
         .shortDescription("H3.3 | FuelDriven und ElectricallyDriven zugleich implementieren")
-        .addChildCriteria()
+        .addChildCriteria(H3_3_T1, H3_3_T2, H3_3_T3, H3_3_T4, H3_3_T5, H3_3_T6)
         .build();
+
+    public static final Criterion H3_4_T1 = Criterion.builder()
+        .shortDescription("Die Klasse HybridObject3 ist korrekt deklariert und implementiert HybridVehicle")
+        .grader(
+            Grader.testAwareBuilder()
+                .requirePass(JUnitTestRef.ofMethod(() -> TutorTests_H_3_4.class.getMethod(
+                    "test_HybridType3_class")))
+                .pointsPassedMax()
+                .pointsFailedMin()
+                .build())
+        .build();
+
+    public static final Criterion H3_4_T2 = Criterion.builder()
+        .shortDescription("Die Attribute, sowie Getter und Setter und alle weiteren zu implementiernden Methoden (bis aus getPrefferedDriveType) sind erkennbar korrekt umgesetzt.")
+        .grader(
+            Grader.testAwareBuilder()
+                .requirePass(JUnitTestRef.ofMethod(() -> TutorTests_H_3_4.class.getMethod(
+                    "test_HybridType3_attributes_get_set")))
+                .pointsPassedMax()
+                .pointsFailedMin()
+                .build())
+        .build();
+
+    public static final Criterion H3_4_T3 = Criterion.builder()
+        .shortDescription("Die Methode getPreferredDriveType ist in HybridType3 korrekt unter Nutzung des Bedingungsoperators realisiert.")
+        .grader(
+            Grader.testAwareBuilder()
+                .requirePass(JUnitTestRef.ofMethod(() -> TutorTests_H_3_4.class.getMethod(
+                    "test_HybridType3_getPreferredDriveType")))
+                .requirePass(JUnitTestRef.ofMethod(() -> TutorTests_H_3_4.class.getMethod(
+                    "test_HybridType3_getPreferredDriveType_ternary")))
+                .pointsPassedMax()
+                .pointsFailedMin()
+                .build())
+        .build();
+
 
     public static final Criterion H3_4 = Criterion.builder()
         .shortDescription("H3.4 | HybridVehicle implementieren")
-        .addChildCriteria()
+        .addChildCriteria(H3_4_T1, H3_4_T2, H3_4_T3)
         .build();
 
     public static final Criterion H3 = Criterion.builder()
         .shortDescription("H3 | Abgeleitete / Implementierende Klassen")
-        .addChildCriteria(H3_1, H3_2)
+        .addChildCriteria(H3_1, H3_2, H3_3, H3_4)
         .build();
     public static final Rubric RUBRIC = Rubric.builder()
         .title("H05")

@@ -60,7 +60,7 @@ public class ElectricBoat extends MeansOfTransport implements ElectricallyDriven
 
     @Override
     public void letsGo(byte additionalChargeVolume, int distance) {
-        currentCharge = Math.max(capacity, currentCharge + additionalChargeVolume);
+        currentCharge = Math.min(capacity, currentCharge + additionalChargeVolume);
         letMeMove(distance);
     }
 
