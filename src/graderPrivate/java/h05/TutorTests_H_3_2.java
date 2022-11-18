@@ -60,22 +60,22 @@ public class TutorTests_H_3_2 {
 
     @Test
     public void test_letsGo() throws InvocationTargetException, IllegalAccessException {
-        Field currentCharge_field = H05_Tester.ELECTRIC_BOAT_CT.resolve().resolveAttribute(H05_Tester.ELECTRIC_BOAT_CURRENT_CHARGE_AM);
-        Field capacity_field = H05_Tester.ELECTRIC_BOAT_CT.assureClassResolved().resolveAttribute(H05_Tester.ELECTRIC_BOAT_CAPACITY_AM);
-        Object instance = H05_Tester.ELECTRIC_BOAT_CT.assureClassResolved().resolveInstance();
+        Field currentCharge_field = H05_Tester.ELECTRIC_BOAT_CT.get().resolve().resolveAttribute(H05_Tester.ELECTRIC_BOAT_CURRENT_CHARGE_AM.get());
+        Field capacity_field = H05_Tester.ELECTRIC_BOAT_CT.get().assureClassResolved().resolveAttribute(H05_Tester.ELECTRIC_BOAT_CAPACITY_AM.get());
+        Object instance = H05_Tester.ELECTRIC_BOAT_CT.get().assureClassResolved().resolveInstance();
 
         int[] capacity_TV = {1};
         int[] currentCharge_TV = {2};
         byte[] additionalChargeVolume_TV = {3};
 
         for (int i = 0; i < capacity_TV.length; i++){
-            H05_Tester.ELECTRIC_BOAT_CT.assureClassResolved().setField(currentCharge_field, currentCharge_TV[i]);
-            H05_Tester.ELECTRIC_BOAT_CT.assureClassResolved().setField(capacity_field, capacity_TV[i]);
+            H05_Tester.ELECTRIC_BOAT_CT.get().assureClassResolved().setField(currentCharge_field, currentCharge_TV[i]);
+            H05_Tester.ELECTRIC_BOAT_CT.get().assureClassResolved().setField(capacity_field, capacity_TV[i]);
 
-            H05_Tester.ELECTRICALLY_DRIVEN_LETS_GO_MT.resolveMethod().invoke(instance, additionalChargeVolume_TV[i], 0);
+            H05_Tester.ELECTRICALLY_DRIVEN_LETS_GO_MT.get().resolveMethod().invoke(instance, additionalChargeVolume_TV[i], 0);
 
             int expected_currentCharge = Math.min(capacity_TV[i], currentCharge_TV[i] + additionalChargeVolume_TV[i]);
-            int actual_currentCharge = (int)H05_Tester.ELECTRIC_BOAT_CT.assureClassResolved().getFieldValue(currentCharge_field);
+            int actual_currentCharge = (int)H05_Tester.ELECTRIC_BOAT_CT.get().assureClassResolved().getFieldValue(currentCharge_field);
             assertEquals(expected_currentCharge, actual_currentCharge, "currentCharge entspricht nicht dem erwarteten Wert!");
         }
 
@@ -128,7 +128,7 @@ public class TutorTests_H_3_2 {
 
     @Test
     public void test_constructor() {
-        var constructor = H05_Tester.ELECTRIC_BOAT_CT.resolveConstructor(H05_Tester.ELECTRIC_BOAT_CONSTRUCTOR_PARAMETER_MATCHERS);
+        var constructor = H05_Tester.ELECTRIC_BOAT_CT.get().resolveConstructor(H05_Tester.ELECTRIC_BOAT_CONSTRUCTOR_PARAMETER_MATCHERS.get());
 
         fail("Not implemented");
 
