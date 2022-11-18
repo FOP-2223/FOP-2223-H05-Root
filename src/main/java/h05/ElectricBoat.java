@@ -67,7 +67,7 @@ public class ElectricBoat extends MeansOfTransport implements ElectricallyDriven
     @Override
     public int letMeMove(int distance) {
         int oldCurrentCharge = currentCharge;
-        currentCharge = Math.min(0, currentCharge - Math.min(distance / 100, 1));
+        currentCharge = Math.max(0, currentCharge - Math.min(distance / 100, 1));
         return oldCurrentCharge - currentCharge;
     }
 

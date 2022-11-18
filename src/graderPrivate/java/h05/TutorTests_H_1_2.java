@@ -8,9 +8,9 @@ public class TutorTests_H_1_2 {
 
     @Test
     public void test_enum() {
-        H05_Tester.FUEL_TYPE_CT.get().verify();
+        //H05_Tester.FUEL_TYPE_CT.get().verify();
         String[] enum_constants = {"GASOLINE", "DIESEL", "LPG"};
-        H05_Tester.FUEL_TYPE_CT.get().assertEnumConstants(enum_constants);
+        H05_Tester.FUEL_TYPE_CT.get().verify().assertEnumConstants(enum_constants);
     }
 
     @Test

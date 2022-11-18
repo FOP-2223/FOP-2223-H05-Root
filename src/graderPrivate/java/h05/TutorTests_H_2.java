@@ -17,9 +17,9 @@ public class TutorTests_H_2 {
 
     @Test
     public void test_enum() {
-        H05_Tester.TRANSPORT_TYPE_CT.verify();
+        //H05_Tester.TRANSPORT_TYPE_CT.get().verify();
         String[] enum_constants = {"BICYCLE", "CAR", "VESSEL", "AIRCRAFT"};
-        H05_Tester.TRANSPORT_TYPE_CT.assertEnumConstants(enum_constants);
+        H05_Tester.TRANSPORT_TYPE_CT.get().verify().assertEnumConstants(enum_constants);
     }
 
     @Test
@@ -46,7 +46,7 @@ public class TutorTests_H_2 {
 
     private void check_message(String name, boolean identical) throws Throwable {
 
-        Class transportTypeClass = H05_Tester.TRANSPORT_TYPE_CT.get().getTheClass();
+        Class transportTypeClass = H05_Tester.TRANSPORT_TYPE_CT.get().verify().getTheClass();
         Constructor c = transportTypeClass.getDeclaredConstructor(String.class, int.class);
         c.setAccessible(true);
         MethodHandle h = MethodHandles.lookup().unreflectConstructor(c);
@@ -54,7 +54,7 @@ public class TutorTests_H_2 {
 
         Field transport_type_field =
             H05_Tester.MEANS_OF_TRANSPORT_CT.get().resolve().resolveAttribute(H05_Tester.MEANS_OF_TRANSPORT_TRANSPORT_TYPE_AM.get());
-        var obj = H05_Tester.MEANS_OF_TRANSPORT_CT.get().getNewRealInstance();
+        var obj = H05_Tester.MEANS_OF_TRANSPORT_CT.get().resolve().getNewRealInstance();
         H05_Tester.MEANS_OF_TRANSPORT_CT.get().resolve().setField(obj, transport_type_field, t);
 
         String s = null;
@@ -81,7 +81,7 @@ public class TutorTests_H_2 {
     public void test_message_undefined() {
         Field transport_type_field =
             H05_Tester.MEANS_OF_TRANSPORT_CT.get().resolve().resolveAttribute(H05_Tester.MEANS_OF_TRANSPORT_TRANSPORT_TYPE_AM.get());
-        var obj = H05_Tester.MEANS_OF_TRANSPORT_CT.get().getNewRealInstance();
+        var obj = H05_Tester.MEANS_OF_TRANSPORT_CT.get().resolve().getNewRealInstance();
         H05_Tester.MEANS_OF_TRANSPORT_CT.get().resolve().setField(obj, transport_type_field, null);
         String s = null;
         try {
@@ -114,6 +114,6 @@ public class TutorTests_H_2 {
 
     @Test
     public void test_message_only_char() {
-        // TODO
+        fail("Not implemented");
     }
 }
