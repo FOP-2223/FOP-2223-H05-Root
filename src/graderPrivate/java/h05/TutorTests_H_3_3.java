@@ -42,12 +42,12 @@ public class TutorTests_H_3_3 {
         var constructor = H05_Tester.HYBRID_TYPE_2_CT.resolve().resolveConstructor(H05_Tester.HYBRID_TYPE_2_CONSTRUCTOR_PARAMETER_MATCHERS);
         Object instance = constructor.newInstance();
         Object hybridObject = hybridObject_field.get(instance);
-        assertNotEquals(null, hybridObject, "hybridObject wird nicht im Konstructor gesetzt.");
+        assertNotEquals(null, hybridObject, "hybridObject wird nicht im Konstruktor gesetzt.");
     }
 
     @Test
     public void test_HybridType2_forwarding() {
-        fail("Not implemented");
+        fail("Not implemented: Hybrid2 calls Hybrid1");
     }
 
 }

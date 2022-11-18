@@ -54,8 +54,8 @@ public class TutorTests_H_3_2 {
     }
 
     @Test
-    public void test_chargeable_ternary() {
-        fail("Not implemented");
+    public void test_chargeable_return() {
+        fail("Not implemented: *VolatgeChargeable only return");
     }
 
     @Test
@@ -85,6 +85,7 @@ public class TutorTests_H_3_2 {
         }
 
         //TODO check if let me move was called
+        fail("Not implemented: check letMeMove calles");
     }
 
 
@@ -150,7 +151,7 @@ public class TutorTests_H_3_2 {
 
     @Test
     public void test_setSpecificType_no_ternary() {
-        fail("Not implemented");
+        fail("Not implemented: setSpecificType does not use ternary");
     }
 
     @Test

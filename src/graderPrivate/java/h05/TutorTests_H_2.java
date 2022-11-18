@@ -114,6 +114,6 @@ public class TutorTests_H_2 {
 
     @Test
     public void test_message_only_char() {
-        fail("Not implemented");
+        fail("Not implemented: toString() only uses char operations");
     }
 }

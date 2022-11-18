@@ -305,7 +305,7 @@ public class H05_RubricProvider implements RubricProvider {
                 .requirePass(JUnitTestRef.ofMethod(() -> TutorTests_H_3_2.class.getMethod(
                     "test_chargeable")))
                 .requirePass(JUnitTestRef.ofMethod(() -> TutorTests_H_3_2.class.getMethod(
-                    "test_chargeable_ternary")))
+                    "test_chargeable_return")))
                 .pointsPassedMax()
                 .pointsFailedMin()
                 .build())

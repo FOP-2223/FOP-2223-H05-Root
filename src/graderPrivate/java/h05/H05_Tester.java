@@ -256,6 +256,6 @@ public class H05_Tester {
     public static final MethodTester HYBRID_TYPE_3_TOGGLE_STANDARD_VOLTAGE_CHARGEABLE_MT = new MethodTester(HYBRID_TYPE_3_CT, "toggleStandardVoltageChargeable", minSim, Modifier.PUBLIC, void.class);
     public static final MethodTester HYBRID_TYPE_3_TOGGLE_HIGH_VOLTAGE_CHARGEABLE_MT = new MethodTester(HYBRID_TYPE_3_CT, "toggleHighVoltageChargeable", minSim, Modifier.PUBLIC, void.class);
 
-    public static final MethodTester HYBRID_TYPE_3_TOGGLE_PREFERRED_DRIVE_TYPE_MT = new MethodTester(HYBRID_TYPE_1_CT, "togglePreferredDriveType", minSim, Modifier.PUBLIC, void.class);
+    public static final MethodTester HYBRID_TYPE_3_TOGGLE_PREFERRED_DRIVE_TYPE_MT = new MethodTester(HYBRID_TYPE_3_CT, "togglePreferredDriveType", minSim, Modifier.PUBLIC, void.class);
 
 }
