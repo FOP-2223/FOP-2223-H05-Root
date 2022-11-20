@@ -1,13 +1,8 @@
 package h05;
 
-import org.sourcegrade.jagr.api.rubric.Criterion;
-import org.sourcegrade.jagr.api.rubric.Grader;
-import org.sourcegrade.jagr.api.rubric.JUnitTestRef;
-import org.sourcegrade.jagr.api.rubric.Rubric;
-import org.sourcegrade.jagr.api.rubric.RubricProvider;
+import org.sourcegrade.jagr.api.rubric.*;
 
 import java.util.function.Function;
-import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class H05_RubricProvider implements RubricProvider {
@@ -97,8 +92,8 @@ public class H05_RubricProvider implements RubricProvider {
 
     public static final Criterion H2_T5 = makeSimpleCriterion(
         "Die Methode [[[toString]]] funktioniert für einfache Fälle erkennbar korrekt.",
-        JUnitTestRef.ofMethod(() -> TutorTests_H_2.class.getMethod("test_message_normal")),
-        JUnitTestRef.ofMethod(() -> TutorTests_H_2.class.getMethod("test_message_only_char")));
+        JUnitTestRef.ofMethod(() -> TutorTests_H_2.class.getMethod("test_message_normal", String.class))
+        /*JUnitTestRef.ofMethod(() -> TutorTests_H_2.class.getMethod("test_message_only_char"))*/);
 
     public static final Criterion H2_T6 = makeSimpleCriterion(
         "Die Methode [[[toString]]] funktioniert auch für null erkennbar korrekt.",
