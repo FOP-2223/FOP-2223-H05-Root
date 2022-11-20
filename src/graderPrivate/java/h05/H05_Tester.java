@@ -300,7 +300,7 @@ public class H05_Tester {
         minSim,
         Modifier.PRIVATE | Modifier.STATIC,
         boolean.class);
-    public static final Supplier<AttributeMatcher> HYBRID_TYPE_3_HIGH_VOLTAGE_CHARGEABLE_TYPE_AM = () -> new AttributeMatcher(
+    public static final Supplier<AttributeMatcher> HYBRID_TYPE_3_HIGH_VOLTAGE_CHARGEABLE_AM = () -> new AttributeMatcher(
         "highVoltageChargeable",
         minSim,
         Modifier.PRIVATE | Modifier.STATIC,
