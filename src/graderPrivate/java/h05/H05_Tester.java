@@ -9,8 +9,6 @@ import org.tudalgo.algoutils.reflect.TestUtils;
 
 import java.lang.reflect.Modifier;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
 import java.util.function.Supplier;
 
@@ -30,15 +28,13 @@ public class H05_Tester {
             "standardVoltageChargeable",
             minSim,
             Modifier.PUBLIC | Modifier.ABSTRACT,
-            boolean.class,
-            Collections.emptyList());
+            boolean.class);
     public static final Supplier<MethodTester> ELECTRICALLY_DRIVEN_HIGH_VOLTAGE_CHARGEABLE_MT = () ->
         new MethodTester(ELECTRICALLY_DRIVEN_CT.get(),
             "highVoltageChargeable",
             minSim,
             Modifier.PUBLIC | Modifier.ABSTRACT,
-            boolean.class,
-            Collections.emptyList());
+            boolean.class);
     public static final Supplier<MethodTester> ELECTRICALLY_DRIVEN_LETS_GO_MT = () -> new MethodTester(ELECTRICALLY_DRIVEN_CT.get(),
         "letsGo",
         minSim,
@@ -62,8 +58,7 @@ public class H05_Tester {
         "getFuelType",
         minSim,
         Modifier.PUBLIC | Modifier.ABSTRACT,
-        FUEL_TYPE_CT.get().findClass(),
-        Collections.emptyList());
+        FUEL_TYPE_CT.get().findClass());
 
     public static final Supplier<MethodTester> FUEL_DRIVEN_GET_AVERAGE_CONSUMPTION_MT = () -> new MethodTester(FUEL_DRIVEN_CT.get(),
         "getAverageConsumption",
@@ -92,8 +87,7 @@ public class H05_Tester {
             "getPreferredDriveType",
             minSim,
             Modifier.PUBLIC | Modifier.ABSTRACT,
-            DRIVE_TYPE_CT.get().findClass(),
-            Collections.emptyList());
+            DRIVE_TYPE_CT.get().findClass());
 
     // H2
     public static final Supplier<ClassTester<?>> TRANSPORT_TYPE_CT = () -> new ClassTester<>("h05",
@@ -119,25 +113,19 @@ public class H05_Tester {
         minSim,
         Modifier.PUBLIC,
         String.class);
-    public static final Supplier<ParameterMatcher[]> MEANS_OF_TRANSPORT_LET_ME_MOVE_PARAMETER_MATCHERS = () -> new ParameterMatcher[] {
-        new ParameterMatcher("distance", minSim, int.class)
-    };
     public static final Supplier<MethodTester> MEANS_OF_TRANSPORT_LET_ME_MOVE_MT = () -> new MethodTester(MEANS_OF_TRANSPORT_CT.get(),
         "letMeMove",
         minSim,
         Modifier.PUBLIC | Modifier.ABSTRACT,
         int.class,
-        Arrays.asList(MEANS_OF_TRANSPORT_LET_ME_MOVE_PARAMETER_MATCHERS.get()));
+        List.of(new ParameterMatcher("distance", minSim, int.class)));
     // H3.1
-    public static final Supplier<IdentifierMatcher[]> FUEL_DRIVEN_VEHICLE_INTERFACES = () -> new IdentifierMatcher[] {
-        new IdentifierMatcher("FuelDriven", "h05", minSim)
-    };
     public static final Supplier<ClassTester<?>> FUEL_DRIVEN_VEHICLE_CT = () -> new ClassTester<>("h05",
         "FuelDrivenVehicle",
         minSim,
         Modifier.PUBLIC,
         MEANS_OF_TRANSPORT_CT.get().findClass(),
-        new ArrayList<>(Arrays.asList(FUEL_DRIVEN_VEHICLE_INTERFACES.get())));
+        new ArrayList<>(List.of(new IdentifierMatcher("FuelDriven", "h05", minSim))));
     public static final Supplier<AttributeMatcher> FUEL_DRIVEN_VEHICLE_FUEL_TYPE_AM = () -> new AttributeMatcher("fuelType",
         minSim,
         Modifier.PRIVATE,
@@ -146,26 +134,22 @@ public class H05_Tester {
         minSim,
         Modifier.PRIVATE,
         int.class);
-    public static final Supplier<ParameterMatcher[]> FUEL_DRIVEN_VEHICLE_FILL_UP_PARAMETER_MATCHERS = () -> new ParameterMatcher[] {
-        new ParameterMatcher("fillValue", minSim, int.class)
-    };
     public static final Supplier<MethodTester> FUEL_DRIVEN_VEHICLE_FILL_UP_MT = () -> new MethodTester(FUEL_DRIVEN_VEHICLE_CT.get(),
         "fillUp",
         minSim,
         Modifier.PUBLIC,
         void.class,
-        Arrays.asList(FUEL_DRIVEN_VEHICLE_FILL_UP_PARAMETER_MATCHERS.get()));
+        List.of(new ParameterMatcher("fillValue", minSim, int.class)));
     // H3.2
-    public static final Supplier<IdentifierMatcher[]> ELECTRIC_BOAT_INTERFACES = () -> new IdentifierMatcher[] {
-        new IdentifierMatcher("ElectricallyDriven", "h05", minSim),
-        new IdentifierMatcher("IntSupplier", "java.util.function", minSim)
-    };
     public static final Supplier<ClassTester<?>> ELECTRIC_BOAT_CT = () ->  new ClassTester<>("h05",
         "ElectricBoat",
         minSim,
         Modifier.PUBLIC,
         MEANS_OF_TRANSPORT_CT.get().findClass(),
-        new ArrayList<>(Arrays.asList(ELECTRIC_BOAT_INTERFACES.get())));
+        new ArrayList<>(List.of(
+            new IdentifierMatcher("ElectricallyDriven", "h05", minSim),
+            new IdentifierMatcher("IntSupplier", "java.util.function", minSim)
+        )));
     public static final Supplier<AttributeMatcher> ELECTRIC_BOAT_SPECIFIC_TYPE_AM = () ->  new AttributeMatcher("specificType",
         minSim,
         Modifier.PRIVATE,
@@ -178,16 +162,12 @@ public class H05_Tester {
         minSim,
         Modifier.PRIVATE,
         int.class);
-
-    public static final Supplier<ParameterMatcher[]> ELECTRIC_BOAT_SET_SPECIFIC_TYPE_PARAMETER_MATCHERS = () -> new ParameterMatcher[] {
-        new ParameterMatcher("specificType", minSim, byte.class)
-    };
     public static final Supplier<MethodTester> ELECTRIC_BOAT_SET_SPECIFIC_TYPE_MT = () -> new MethodTester(ELECTRIC_BOAT_CT.get(),
         "setSpecificType",
         minSim,
         Modifier.PUBLIC,
         byte.class,
-        Arrays.asList(ELECTRIC_BOAT_SET_SPECIFIC_TYPE_PARAMETER_MATCHERS.get()));
+        List.of(new ParameterMatcher("specificType", minSim, byte.class)));
     public static final Supplier<ParameterMatcher[]> ELECTRIC_BOAT_CONSTRUCTOR_PARAMETER_MATCHERS = () -> new ParameterMatcher[] {
         new ParameterMatcher("specificType", minSim, byte.class),
         new ParameterMatcher("currentCharge", minSim, int.class),
@@ -195,16 +175,15 @@ public class H05_Tester {
     };
 
     //H3.3
-    public static final Supplier<IdentifierMatcher[]> HYBRID_TYPE_1_INTERFACES = () -> new IdentifierMatcher[] {
-        new IdentifierMatcher("ElectricallyDriven", "h05", minSim),
-        new IdentifierMatcher("FuelDriven", "h05", minSim)
-    };
     public static final Supplier<ClassTester<?>> HYBRID_TYPE_1_CT = () -> new ClassTester<>("h05",
         "HybridType1",
         minSim,
         Modifier.PUBLIC,
         null,
-        new ArrayList<>(Arrays.asList(HYBRID_TYPE_1_INTERFACES.get())));
+        new ArrayList<>(List.of(
+            new IdentifierMatcher("ElectricallyDriven", "h05", minSim),
+            new IdentifierMatcher("FuelDriven", "h05", minSim)
+        )));
     public static final Supplier<AttributeMatcher> HYBRID_TYPE_1_FUEL_TYPE_AM = () -> new AttributeMatcher(
         "fuelType",
         minSim,
@@ -226,25 +205,19 @@ public class H05_Tester {
         Modifier.PRIVATE | Modifier.STATIC,
         boolean.class);
 
-    public static final Supplier<ParameterMatcher[]> HYBRID_TYPE_1_SET_FUEL_TYPE_PARAMETER_MATCHERS = () -> new ParameterMatcher[] {
-        new ParameterMatcher("fuelType", minSim, FUEL_TYPE_CT.get().findClass())
-    };
     public static final Supplier<MethodTester> HYBRID_TYPE_1_SET_FUEL_TYPE_MT = () -> new MethodTester(HYBRID_TYPE_1_CT.get(),
         "setFuelType",
         minSim,
         Modifier.PUBLIC,
         void.class,
-        Arrays.asList(HYBRID_TYPE_1_SET_FUEL_TYPE_PARAMETER_MATCHERS.get()));
+        List.of(new ParameterMatcher("fuelType", minSim, FUEL_TYPE_CT.get().findClass())));
 
-    public static final Supplier<ParameterMatcher[]> HYBRID_TYPE_1_SET_AVERAGE_CONSUMPTION_PARAMETER_MATCHERS = () -> new ParameterMatcher[] {
-        new ParameterMatcher("averageConsumption", minSim, double.class)
-    };
     public static final Supplier<MethodTester> HYBRID_TYPE_1_SET_AVERAGE_CONSUMPTION_MT = () -> new MethodTester(HYBRID_TYPE_1_CT.get(),
         "setAverageConsumption",
         minSim,
         Modifier.PUBLIC,
         void.class,
-        Arrays.asList(HYBRID_TYPE_1_SET_AVERAGE_CONSUMPTION_PARAMETER_MATCHERS.get()));
+        List.of(new ParameterMatcher("averageConsumption", minSim, double.class)));
 
     public static final Supplier<MethodTester> HYBRID_TYPE_1_TOGGLE_STANDARD_VOLTAGE_CHARGEABLE_MT = () -> new MethodTester(HYBRID_TYPE_1_CT.get(),
         "toggleStandardVoltageChargeable",
@@ -257,16 +230,15 @@ public class H05_Tester {
         Modifier.PUBLIC,
         void.class);
 
-    public static final Supplier<IdentifierMatcher[]> HYBRID_TYPE_2_INTERFACES = () -> new IdentifierMatcher[] {
-        new IdentifierMatcher("ElectricallyDriven", "h05", minSim),
-        new IdentifierMatcher("FuelDriven", "h05", minSim)
-    };
     public static final Supplier<ClassTester<?>> HYBRID_TYPE_2_CT = () -> new ClassTester<>("h05",
         "HybridType2",
         minSim,
         Modifier.PUBLIC,
         MEANS_OF_TRANSPORT_CT.get().findClass(),
-        new ArrayList<>(Arrays.asList(HYBRID_TYPE_2_INTERFACES.get())));
+        new ArrayList<>(List.of(
+            new IdentifierMatcher("ElectricallyDriven", "h05", minSim),
+            new IdentifierMatcher("FuelDriven", "h05", minSim)
+        )));
     public static final Supplier<AttributeMatcher> HYBRID_TYPE_2_HYBRID_OBJECT_AM = () -> new AttributeMatcher(
         "hybridObject",
         minSim,
@@ -276,15 +248,12 @@ public class H05_Tester {
 
 
     //H3.4
-    public static final Supplier<IdentifierMatcher[]> HYBRID_TYPE_3_INTERFACES = () -> new IdentifierMatcher[] {
-        new IdentifierMatcher("HybridVehicle", "h05", minSim)
-    };
     public static final Supplier<ClassTester<?>> HYBRID_TYPE_3_CT = () -> new ClassTester<>("h05",
         "HybridType3",
         minSim,
         Modifier.PUBLIC,
         null,
-        new ArrayList<>(Arrays.asList(HYBRID_TYPE_3_INTERFACES.get())));
+        new ArrayList<>(List.of(new IdentifierMatcher("HybridVehicle", "h05", minSim))));
     public static final Supplier<AttributeMatcher> HYBRID_TYPE_3_FUEL_TYPE_AM = () -> new AttributeMatcher(
         "fuelType",
         minSim,
@@ -311,25 +280,19 @@ public class H05_Tester {
         Modifier.PRIVATE | Modifier.STATIC,
         DRIVE_TYPE_CT.get().findClass());
 
-    public static final Supplier<ParameterMatcher[]> HYBRID_TYPE_3_SET_FUEL_TYPE_PARAMETER_MATCHERS = () -> new ParameterMatcher[] {
-        new ParameterMatcher("fuelType", minSim, FUEL_TYPE_CT.get().findClass())
-    };
     public static final Supplier<MethodTester> HYBRID_TYPE_3_SET_FUEL_TYPE_MT = () -> new MethodTester(HYBRID_TYPE_3_CT.get(),
         "setFuelType",
         minSim,
         Modifier.PUBLIC,
         void.class,
-        Arrays.asList(HYBRID_TYPE_3_SET_FUEL_TYPE_PARAMETER_MATCHERS.get()));
+        List.of(new ParameterMatcher("fuelType", minSim, FUEL_TYPE_CT.get().findClass())));
 
-    public static final Supplier<ParameterMatcher[]> HYBRID_TYPE_3_SET_AVERAGE_CONSUMPTION_PARAMETER_MATCHERS = () -> new ParameterMatcher[] {
-        new ParameterMatcher("averageConsumption", minSim, double.class)
-    };
     public static final Supplier<MethodTester> HYBRID_TYPE_3_SET_AVERAGE_CONSUMPTION_MT = () -> new MethodTester(HYBRID_TYPE_3_CT.get(),
         "setAverageConsumption",
         minSim,
         Modifier.PUBLIC,
         void.class,
-        Arrays.asList(HYBRID_TYPE_3_SET_AVERAGE_CONSUMPTION_PARAMETER_MATCHERS.get()));
+        List.of(new ParameterMatcher("averageConsumption", minSim, double.class)));
 
     public static final Supplier<MethodTester> HYBRID_TYPE_3_TOGGLE_STANDARD_VOLTAGE_CHARGEABLE_MT = () -> new MethodTester(HYBRID_TYPE_3_CT.get(),
         "toggleStandardVoltageChargeable",
