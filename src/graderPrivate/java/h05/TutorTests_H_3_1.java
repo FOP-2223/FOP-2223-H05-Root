@@ -93,7 +93,7 @@ public class TutorTests_H_3_1 {
         }
 
         assertEquals(filling_level_before - reduceBy, actual_filling_level_after, "Methode letMeMove reduziert fillingLevel nicht korrekt");
-        assertEquals(reduceBy / 10, returned_value, "Der Rückgabewert der Methode letMeMove ist nicht korrekt!");
+        assertEquals(reduceBy * 10, returned_value, "Der Rückgabewert der Methode letMeMove ist nicht korrekt!");
     }
 
     @Test

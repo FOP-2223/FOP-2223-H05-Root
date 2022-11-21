@@ -48,6 +48,6 @@ public class FuelDrivenVehicle extends MeansOfTransport implements FuelDriven {
             reduceBy = fillingLevel;
         }
         fillingLevel -= reduceBy;
-        return reduceBy / 10;
+        return reduceBy * 10;
     }
 }
