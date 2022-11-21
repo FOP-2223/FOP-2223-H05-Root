@@ -27,7 +27,7 @@ public class TutorTests_H_3_4 {
     }
 
     @Test
-    public void test_HybridType3_getPreferredDriveType() throws InvocationTargetException, IllegalAccessException {
+    public void test_HybridType3_togglePreferredDriveType() throws InvocationTargetException, IllegalAccessException {
         var hybrid3 = H05_Tester.HYBRID_TYPE_3_CT.get().resolve();
         var instance = hybrid3.resolveInstance();
         var driveType_field = hybrid3.resolveAttribute(H05_Tester.HYBRID_TYPE_3_PREFERRED_DRIVE_TYPE_AM.get());
@@ -44,7 +44,7 @@ public class TutorTests_H_3_4 {
     }
 
     @Test
-    public void test_HybridType3_getPreferredDriveType_ternary() {
+    public void test_HybridType3_togglePreferredDriveType_ternary() {
         fail("Not implemented: getPreferredDriveType uses ternary");
     }
 }
