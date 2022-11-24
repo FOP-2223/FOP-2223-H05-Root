@@ -154,12 +154,48 @@ public class TutorTests_H_3_2 {
         fail("Not implemented: setSpecificType does not use ternary");
     }
 
-    @Test
-    public void test_constructor() {
+
+    private void test_constructor_single(int currentCharge, int capacity) throws InvocationTargetException, InstantiationException, IllegalAccessException {
         var electric_boat = H05_Tester.ELECTRIC_BOAT_CT.get().resolve();
+        var means_of_transport = H05_Tester.MEANS_OF_TRANSPORT_CT.get().resolve();
+
+        var currentCharge_field = electric_boat.resolveAttribute(H05_Tester.ELECTRIC_BOAT_CURRENT_CHARGE_AM.get());
+        currentCharge_field.setAccessible(true);
+        var capacity_field = electric_boat.resolveAttribute(H05_Tester.ELECTRIC_BOAT_CAPACITY_AM.get());
+        capacity_field.setAccessible(true);
+        var transportType_field = means_of_transport.resolveAttribute(H05_Tester.MEANS_OF_TRANSPORT_TRANSPORT_TYPE_AM.get());
+        transportType_field.setAccessible(true);
+
         var constructor = electric_boat.resolveConstructor(H05_Tester.ELECTRIC_BOAT_CONSTRUCTOR_PARAMETER_MATCHERS.get());
 
-        fail("Not implemented");
+        Object instance = constructor.newInstance((byte)0, currentCharge, capacity);
 
+        int expected_capacity = Math.min(0, capacity);
+        int expected_currentCharge = Math.min(expected_capacity, Math.max(0, currentCharge));
+        Object expected_transportType = null;
+
+        int actual_capacity = (int)capacity_field.get(instance);
+        int actual_currentCharge = (int)currentCharge_field.get(instance);
+        var actual_transportType = transportType_field.get(instance);
+
+        assertEquals(expected_capacity, actual_capacity, "Attribut Capacity wird nicht korrekt gesetzt.");
+        assertEquals(expected_currentCharge, actual_currentCharge, "Attribut currentCharge wird nicht korrekt gesetzt.");
+        assertEquals("VESSEL", actual_transportType.toString(), "Attribut transportType wird nicht korrekt gesetzt."); //TODO: Nicht so clean
+    }
+
+
+    @Test
+    public void test_constructor() throws InvocationTargetException, InstantiationException, IllegalAccessException {
+        int[] currentCharge_TV = new int[]{10, 3, 33};
+        int[] capacity_TV = new int[]{10, 1, -42};
+
+        for(int i = 0; i < currentCharge_TV.length; i++){
+            test_constructor_single(currentCharge_TV[i], capacity_TV[i]);
+        }
+    }
+
+    @Test
+    public void test_constructor_calls_setSpecificType(){
+        fail("Not implemented: Constructor calls setSpecificType");
     }
 }

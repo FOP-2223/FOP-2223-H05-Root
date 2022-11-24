@@ -171,13 +171,13 @@ public class H05_RubricProvider implements RubricProvider {
 
     public static final Criterion H3_2_T7 = makeSimpleCriterion(
         "Der Konstruktor der Klasse [[[ElectricBoat]]] ist korrekt implementiert.",
-        JUnitTestRef.ofMethod(() -> TutorTests_H_3_2.class.getMethod("test_constructor")));
+        JUnitTestRef.ofMethod(() -> TutorTests_H_3_2.class.getMethod("test_constructor")),
+        JUnitTestRef.ofMethod(() -> TutorTests_H_3_2.class.getMethod("test_constructor_calls_setSpecificType")));
 
     public static final Criterion H3_2 = Criterion.builder()
         .shortDescription(CODE_TAGIFY.apply("H3.2 | [[[ElectricallyDriven]]] durch [[[ElectricBoat]]] implementieren"))
         .addChildCriteria(H3_2_T1, H3_2_T2, H3_2_T3, H3_2_T4, H3_2_T5, H3_2_T6, H3_2_T7)
         .build();
-
 
     public static final Criterion H3_3_T1 = makeSimpleCriterion(
         "Die Klasse [[[HybridType]]] ist erkennbar korrekt definiert und implementiert [[[FuelDriven]]] und [[[ElectricallyDriven]]]",
