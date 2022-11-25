@@ -11,7 +11,7 @@ public class ElectricBoat extends MeansOfTransport implements ElectricallyDriven
         setSpecificType(specificType);
         transportType = TransportType.VESSEL;
 
-        this.capacity = Math.min(0, capacity);
+        this.capacity = Math.max(0, capacity);
         this.currentCharge = Math.min(this.capacity, Math.max(0, currentCharge));
     }
 
