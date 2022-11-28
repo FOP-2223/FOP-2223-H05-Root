@@ -30,7 +30,7 @@ public class ElectricBoat extends MeansOfTransport implements ElectricallyDriven
      */
     public byte setSpecificType(byte specificType) {
         byte oldSpecificType = this.specificType;
-        this.specificType = (byte) Math.min(30, Math.max(0, specificType));
+        this.specificType = (byte) Math.max(0, Math.min(30, specificType));
         return oldSpecificType;
     }
 

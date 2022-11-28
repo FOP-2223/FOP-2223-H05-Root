@@ -1,6 +1,7 @@
 package h05;
 
 import org.sourcegrade.jagr.api.rubric.*;
+import org.sourcegrade.jagr.api.testing.TestCycle;
 
 import java.util.function.Function;
 import java.util.regex.Pattern;
@@ -153,11 +154,11 @@ public class H05_RubricProvider implements RubricProvider {
     public static final Criterion H3_2_T3 = makeSimpleCriterion(
         "Die Klasse [[[ElectricBoat]]] setzt die Methoden [[[standardVoltageChargable]]] und [[[highVoltageChargable]]] korrekt um.",
         JUnitTestRef.ofMethod(() -> TutorTests_H_3_2.class.getMethod("test_chargeable")),
-        JUnitTestRef.ofMethod(() -> TutorTests_H_3_2.class.getMethod("test_chargeable_return")));
+        JUnitTestRef.ofMethod(() -> TutorTests_H_3_2.class.getMethod("test_chargeable_return", TestCycle.class)));
 
     public static final Criterion H3_2_T4 = makeSimpleCriterion(
         "Die Klasse [[[ElectricBoat]]] setzt die Methoden [[[letsGo]]] und [[[letMeMove]]] korrekt um.",
-        JUnitTestRef.ofMethod(() -> TutorTests_H_3_2.class.getMethod("test_letsGo")),
+        JUnitTestRef.ofMethod(() -> TutorTests_H_3_2.class.getMethod("test_letsGo", TestCycle.class)),
         JUnitTestRef.ofMethod(() -> TutorTests_H_3_2.class.getMethod("test_letMeMove")));
 
     public static final Criterion H3_2_T5 = makeSimpleCriterion(
@@ -167,12 +168,12 @@ public class H05_RubricProvider implements RubricProvider {
     public static final Criterion H3_2_T6 = makeSimpleCriterion(
         "Die Klasse [[[ElectricBoat]]] setzt die Methode [[[setSpecificType]]] korrekt um.",
         JUnitTestRef.ofMethod(() -> TutorTests_H_3_2.class.getMethod("test_setSpecificType")),
-        JUnitTestRef.ofMethod(() -> TutorTests_H_3_2.class.getMethod("test_setSpecificType_no_ternary")));
+        JUnitTestRef.ofMethod(() -> TutorTests_H_3_2.class.getMethod("test_setSpecificType_no_ternary", TestCycle.class)));
 
     public static final Criterion H3_2_T7 = makeSimpleCriterion(
         "Der Konstruktor der Klasse [[[ElectricBoat]]] ist korrekt implementiert.",
         JUnitTestRef.ofMethod(() -> TutorTests_H_3_2.class.getMethod("test_constructor")),
-        JUnitTestRef.ofMethod(() -> TutorTests_H_3_2.class.getMethod("test_constructor_calls_setSpecificType")));
+        JUnitTestRef.ofMethod(() -> TutorTests_H_3_2.class.getMethod("test_constructor_calls_setSpecificType", TestCycle.class)));
 
     public static final Criterion H3_2 = Criterion.builder()
         .shortDescription(CODE_TAGIFY.apply("H3.2 | [[[ElectricallyDriven]]] durch [[[ElectricBoat]]] implementieren"))

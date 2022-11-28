@@ -1,13 +1,21 @@
 package h05;
 
+import h05.transform.ClassTransformerTemplate;
+import h05.transform.H3_2_Transformers;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.opentest4j.AssertionFailedError;
 import org.sourcegrade.jagr.api.rubric.TestForSubmission;
+import org.sourcegrade.jagr.api.testing.SourceFile;
+import org.sourcegrade.jagr.api.testing.TestCycle;
+import org.sourcegrade.jagr.api.testing.extension.TestCycleResolver;
 import org.tudalgo.algoutils.reflect.ClassTester;
 import org.tudalgo.algoutils.tutor.general.assertions.Context;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.util.function.IntSupplier;
+import java.util.regex.Pattern;
 
 import static org.tudalgo.algoutils.tutor.general.assertions.Assertions2.*;
 
@@ -61,12 +69,41 @@ public class TutorTests_H_3_2 {
     }
 
     @Test
-    public void test_chargeable_return() {
-        fail(emptyContext(), result -> "Not implemented: *VoltageChargeable only return");
+    @ExtendWith(TestCycleResolver.class)
+    public void test_chargeable_return(TestCycle testCycle) {
+        SourceFile sourceFile = testCycle.getSubmission().getSourceFile("h05/ElectricBoat.java");
+        if (sourceFile == null) {
+            throw new AssertionFailedError("Source file h05/ElectricBoat.java was not found in submission");
+        }
+
+        String submissionContent = sourceFile.getContent();
+        boolean b1 = Pattern.compile(".*standardVoltageChargeable\\s*?\\(\\s*?\\)\\s*?\\{\\s*?return.*?;\\s*?}.*")
+            .matcher(submissionContent)
+            .find();
+        boolean b2 = Pattern.compile(".*highVoltageChargeable\\s*?\\(\\s*?\\)\\s*?\\{\\s*?return.*?;\\s*?}.*")
+            .matcher(submissionContent)
+            .find();
+
+        assertTrue(b1, emptyContext(), result ->
+            "Method standardVoltageChargeable does not have exactly one statement (a single return statement)");
+        assertTrue(b2, emptyContext(), result ->
+            "Method highVoltageChargeable does not have exactly one statement (a single return statement)");
+
+        H3_2_Transformers.STANDARD_VOLTAGE_ILLEGAL_INSN = false;
+        H3_2_Transformers.HIGH_VOLTAGE_ILLEGAL_INSN = false;
+
+        testCycle.getClassLoader().visitClass("h05.ElectricBoat", new ClassTransformerTemplate("", H3_2_Transformers.CHARGEABLE_TRANSFORMER));
+        if (H3_2_Transformers.STANDARD_VOLTAGE_ILLEGAL_INSN) {
+            fail(emptyContext(), result -> "Illegal instructions used in method standardVoltageChargeable");
+        }
+        if (H3_2_Transformers.HIGH_VOLTAGE_ILLEGAL_INSN) {
+            fail(emptyContext(), result -> "Illegal instructions used in method highVoltageChargeable");
+        }
     }
 
     @Test
-    public void test_letsGo() throws InvocationTargetException, IllegalAccessException {
+    @ExtendWith(TestCycleResolver.class)
+    public void test_letsGo(TestCycle testCycle) throws InvocationTargetException, IllegalAccessException {
         Field currentCharge_field = H05_Tester.ELECTRIC_BOAT_CT
             .get().resolve().resolveAttribute(H05_Tester.ELECTRIC_BOAT_CURRENT_CHARGE_AM.get());
         currentCharge_field.trySetAccessible();
@@ -99,8 +136,12 @@ public class TutorTests_H_3_2 {
                 "currentCharge does not match the expected value");
         }
 
-        //TODO check if let me move was called
-        fail(emptyContext(), result -> "Not implemented: check letMeMove calls");
+        H3_2_Transformers.LET_ME_MOVE_INVOKED = false;
+        testCycle.getClassLoader()
+            .visitClass("h05.ElectricBoat", new ClassTransformerTemplate("", H3_2_Transformers.LET_ME_MOVE_TRANSFORMER));
+        if (!H3_2_Transformers.LET_ME_MOVE_INVOKED) {
+            fail(emptyContext(), result -> "Method letsGo did not invoke letMeMove");
+        }
     }
 
 
@@ -166,7 +207,7 @@ public class TutorTests_H_3_2 {
             .add("old specificType", expected_old_specificType)
             .add("specificType parameter", specificType)
             .build();
-        assertEquals(Math.max(0, Math.min(30, specificType)), actual_new_specificType, context, result ->
+        assertEquals((byte) Math.max(0, Math.min(30, specificType)), actual_new_specificType, context, result ->
             "setSpecificType did not update the specificType field");
         assertEquals(expected_old_specificType, actual_old_specificType, context, result ->
             "setSpecificType did not return the field's old value");
@@ -181,12 +222,22 @@ public class TutorTests_H_3_2 {
     }
 
     @Test
-    public void test_setSpecificType_no_ternary() {
-        fail(emptyContext(), result -> "Not implemented: setSpecificType does not use ternary operator");
+    @ExtendWith(TestCycleResolver.class)
+    public void test_setSpecificType_no_ternary(TestCycle testCycle) {
+        SourceFile sourceFile = testCycle.getSubmission().getSourceFile("h05/ElectricBoat.java");
+        if (sourceFile == null) {
+            throw new AssertionFailedError("Source file h05/ElectricBoat.java was not found in submission");
+        }
+
+        boolean ternaryUsed = Pattern.compile(".*setSpecificType\\s*?\\(.*?\\)\\s*?\\{[^}]*?\\?[^}]*?:[^}]*?}.*")
+            .matcher(sourceFile.getContent())
+            .find();
+        assertFalse(ternaryUsed, emptyContext(), result ->
+            "Ternary operator used in setSpecificType");
     }
 
 
-    private void test_constructor_single(int currentCharge, int capacity) throws InvocationTargetException, InstantiationException, IllegalAccessException {
+    private void test_constructor_single(int currentCharge, int capacity) throws ReflectiveOperationException {
         var electric_boat = H05_Tester.ELECTRIC_BOAT_CT.get().resolve();
         var means_of_transport = H05_Tester.MEANS_OF_TRANSPORT_CT.get().resolve();
 
@@ -225,7 +276,7 @@ public class TutorTests_H_3_2 {
 
 
     @Test
-    public void test_constructor() throws InvocationTargetException, InstantiationException, IllegalAccessException {
+    public void test_constructor() throws ReflectiveOperationException {
         int[] currentCharge_TV = new int[]{10, 3, 33};
         int[] capacity_TV = new int[]{10, 1, -42};
 
@@ -235,7 +286,13 @@ public class TutorTests_H_3_2 {
     }
 
     @Test
-    public void test_constructor_calls_setSpecificType() {
-        fail(emptyContext(), result -> "Not implemented: Constructor calls setSpecificType");
+    @ExtendWith(TestCycleResolver.class)
+    public void test_constructor_calls_setSpecificType(TestCycle testCycle) {
+        H3_2_Transformers.SET_SPECIFIC_TYPE_INVOKED = false;
+        testCycle.getClassLoader()
+            .visitClass("h05.ElectricBoat", new ClassTransformerTemplate("", H3_2_Transformers.SET_SPECIFIC_TYPE_TRANSFORMER));
+
+        assertTrue(H3_2_Transformers.SET_SPECIFIC_TYPE_INVOKED, emptyContext(), result ->
+            "Method setSpecificType was not invoked in constructor of ElectricBoat");
     }
 }
