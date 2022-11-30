@@ -202,7 +202,7 @@ public class H05_RubricProvider implements RubricProvider {
 
     public static final Criterion H3_3_T6 = makeSimpleCriterion(
         "Alle zu implementierenden Methoden funktionieren korrekt und leiten die Aufrufe an [[[hybridObject]]] weiter.",
-        JUnitTestRef.ofMethod(() -> TutorTests_H_3_3.class.getMethod("test_HybridType2_forwarding")));
+        JUnitTestRef.ofMethod(() -> TutorTests_H_3_3.class.getMethod("test_HybridType2_forwarding", TestCycle.class)));
 
     public static final Criterion H3_3 = Criterion.builder()
         .shortDescription(CODE_TAGIFY.apply("H3.3 | [[[FuelDriven]]] und [[[ElectricallyDriven]]] zugleich implementieren"))

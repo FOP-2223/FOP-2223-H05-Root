@@ -1,7 +1,12 @@
 package h05;
 
+import h05.transform.ClassTransformerTemplate;
+import h05.transform.H3_3_Transformers;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.sourcegrade.jagr.api.rubric.TestForSubmission;
+import org.sourcegrade.jagr.api.testing.TestCycle;
+import org.sourcegrade.jagr.api.testing.extension.TestCycleResolver;
 import org.tudalgo.algoutils.reflect.ClassTester;
 import org.tudalgo.algoutils.tutor.general.assertions.Context;
 
@@ -121,7 +126,14 @@ public class TutorTests_H_3_3 {
     }
 
     @Test
-    public void test_HybridType2_forwarding() {
-        fail(emptyContext(), result -> "Not implemented: Hybrid2 calls Hybrid1");
+    @ExtendWith(TestCycleResolver.class)
+    public void test_HybridType2_forwarding(TestCycle testCycle) {
+        H3_3_Transformers.MAP.replaceAll((s, b) -> false);
+        String className = "h05.HybridType2";
+        testCycle.getClassLoader().visitClass(className, new ClassTransformerTemplate(className, H3_3_Transformers.TRANSFORMER));
+        for (String methodSignature : H3_3_Transformers.MAP.keySet()) {
+            assertTrue(H3_3_Transformers.MAP.get(methodSignature), emptyContext(), result ->
+                "Method call to %s was not delegated to HybridType1".formatted(methodSignature.substring(0, methodSignature.indexOf('('))));
+        }
     }
 }
