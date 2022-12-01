@@ -93,19 +93,19 @@ public class H05_RubricProvider implements RubricProvider {
 
     public static final Criterion H2_T5 = makeSimpleCriterion(
         "Die Methode [[[toString]]] funktioniert für einfache Fälle erkennbar korrekt.",
-        JUnitTestRef.ofMethod(() -> TutorTests_H_2.class.getMethod("test_message_normal", String.class))
-        /*JUnitTestRef.ofMethod(() -> TutorTests_H_2.class.getMethod("test_message_only_char"))*/);
+        JUnitTestRef.ofMethod(() -> TutorTests_H_2.class.getMethod("test_message_normal", String.class)),
+        JUnitTestRef.ofMethod(() -> TutorTests_H_2.class.getMethod("test_message_only_char", TestCycle.class)));
 
     public static final Criterion H2_T6 = makeSimpleCriterion(
         "Die Methode [[[toString]]] funktioniert auch für null erkennbar korrekt.",
         JUnitTestRef.ofMethod(() -> TutorTests_H_2.class.getMethod("test_message_undefined")),
-        JUnitTestRef.ofMethod(() -> TutorTests_H_2.class.getMethod("test_message_only_char")));
+        JUnitTestRef.ofMethod(() -> TutorTests_H_2.class.getMethod("test_message_only_char", TestCycle.class)));
 
     public static final Criterion H2_T7 = makeSimpleCriterion(
         "Die Methode [[[toString]]] funktioniert in allen Fällen erkennbar korrekt.",
         JUnitTestRef.ofMethod(() -> TutorTests_H_2.class.getMethod("test_message_article")),
         JUnitTestRef.ofMethod(() -> TutorTests_H_2.class.getMethod("test_message_special_char")),
-        JUnitTestRef.ofMethod(() -> TutorTests_H_2.class.getMethod("test_message_only_char")));
+        JUnitTestRef.ofMethod(() -> TutorTests_H_2.class.getMethod("test_message_only_char", TestCycle.class)));
 
     public static final Criterion H2 = Criterion.builder()
         .shortDescription(CODE_TAGIFY.apply("H2 | Klasse [[[MeansOfTransport]]]"))

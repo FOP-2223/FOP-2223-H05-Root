@@ -1,9 +1,14 @@
 package h05;
 
+import h05.transform.ClassTransformerTemplate;
+import h05.transform.H3_4_Transformers;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvFileSource;
 import org.sourcegrade.jagr.api.rubric.TestForSubmission;
+import org.sourcegrade.jagr.api.testing.TestCycle;
+import org.sourcegrade.jagr.api.testing.extension.TestCycleResolver;
 import org.tudalgo.algoutils.reflect.ClassTester;
 import org.tudalgo.algoutils.tutor.general.assertions.Assertions2;
 import org.tudalgo.algoutils.tutor.general.assertions.Context;
@@ -85,25 +90,19 @@ public class TutorTests_H_2 {
         checkMessage(input);
     }
 
-    /* TODO: Fix other tests, check for illegal methods
     @Test
-    public void test_message_undefined() {
-        Field transport_type_field =
-            H05_Tester.MEANS_OF_TRANSPORT_CT.get().resolve().resolveAttribute(H05_Tester.MEANS_OF_TRANSPORT_TRANSPORT_TYPE_AM.get());
-        var obj = H05_Tester.MEANS_OF_TRANSPORT_CT.get().resolve().getNewRealInstance();
-        H05_Tester.MEANS_OF_TRANSPORT_CT.get().resolve().setField(obj, transport_type_field, null);
-        String s = null;
-        try {
-            s = (String) H05_Tester.MEANS_OF_TRANSPORT_TO_STRING_MT.get().resolveMethod().invoke(obj, null);
-        } catch (IllegalAccessException e) {
-            e.printStackTrace();
-        } catch (InvocationTargetException e) {
-            e.printStackTrace();
-        }
+    public void test_message_undefined() throws ReflectiveOperationException {
+        Field transport_type_field = H05_Tester.MEANS_OF_TRANSPORT_CT
+            .get().resolve().resolveAttribute(H05_Tester.MEANS_OF_TRANSPORT_TRANSPORT_TYPE_AM.get());
+        Object instance = H05_Tester.MEANS_OF_TRANSPORT_CT.get().resolve().getNewRealInstance();
+        ClassTester.setField(instance, transport_type_field, null);
+        String s = (String) H05_Tester.MEANS_OF_TRANSPORT_TO_STRING_MT.get().resolveMethod().invoke(instance);
 
-//        String name = MessageHelper_H_2.matchesFormat(s);
-//        assertEquals("undefined", name.toLowerCase(Locale.ROOT), emptyContext(), result ->
-//            "TransportType null does not return undefined for toString");
+        Context context = contextBuilder()
+            .add("transportType", null)
+            .build();
+        assertTrue(MessageHelper_H_2.matchesUndefined(s), context, result ->
+            "Method toString does not return expected string if transportType is null");
     }
 
     @Test
@@ -123,8 +122,13 @@ public class TutorTests_H_2 {
     }
 
     @Test
-    public void test_message_only_char() {
-        fail(emptyContext(), result -> "Not implemented: toString() only uses char operations");
+    @ExtendWith(TestCycleResolver.class)
+    public void test_message_only_char(TestCycle testCycle) {
+        H3_4_Transformers.illegalInstruction = null;
+        String className = H05_Tester.MEANS_OF_TRANSPORT_CT.get().findClass().getName();
+        testCycle.getClassLoader().visitClass(className, new ClassTransformerTemplate(className, H3_4_Transformers.TRANSFORMER));
+
+        assertNull(H3_4_Transformers.illegalInstruction, emptyContext(), result ->
+            "Illegal instruction used: " + result.object());
     }
-    */
 }

@@ -10,6 +10,10 @@ public class MessageHelper_H_2 {
         return s.matches("^I am (an [AEIOU]|a [BCDFGHJKLMNPQRSTVWXYZ])[a-z0-9 ]*\\.$");
     }
 
+    public static boolean matchesUndefined(String s) {
+        return s.matches("^I am (a|an) undefined\\.$");
+    }
+
     private static String toNoun(String s) {
         String[] splits = s.split("", 2);
         return "%s%s".formatted(splits[0].toUpperCase(), splits[1].toLowerCase());
