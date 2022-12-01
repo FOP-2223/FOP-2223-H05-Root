@@ -221,7 +221,7 @@ public class H05_RubricProvider implements RubricProvider {
     public static final Criterion H3_4_T3 = makeSimpleCriterion(
         "Die Methode [[[togglePreferredDriveType]]] ist in [[[HybridType3]]] korrekt unter Nutzung des Bedingungsoperators realisiert.",
         JUnitTestRef.ofMethod(() -> TutorTests_H_3_4.class.getMethod("test_HybridType3_togglePreferredDriveType")),
-        JUnitTestRef.ofMethod(() -> TutorTests_H_3_4.class.getMethod("test_HybridType3_togglePreferredDriveType_ternary")));
+        JUnitTestRef.ofMethod(() -> TutorTests_H_3_4.class.getMethod("test_HybridType3_togglePreferredDriveType_ternary", TestCycle.class)));
 
     public static final Criterion H3_4 = Criterion.builder()
         .shortDescription(CODE_TAGIFY.apply("H3.4 | [[[HybridVehicle]]] implementieren"))
