@@ -10,30 +10,6 @@ import static org.objectweb.asm.Opcodes.*;
 
 public class H3_2_Transformers {
 
-    public static boolean STANDARD_VOLTAGE_ILLEGAL_INSN = false;
-    public static boolean HIGH_VOLTAGE_ILLEGAL_INSN = false;
-    public static final Function<ClassWriter, ClassVisitor> CHARGEABLE_TRANSFORMER = writer -> new ClassVisitor(ASM9, writer) {
-        @Override
-        public MethodVisitor visitMethod(int access, String name, String descriptor, String signature, String[] exceptions) {
-            final String methodName = name;
-            if (name.matches("(standard|high)VoltageChargeable") && descriptor.equals("()V")) {
-                return new MethodVisitor(ASM9, super.visitMethod(access, name, descriptor, signature, exceptions)) {
-                    @Override
-                    public void visitMethodInsn(int opcode, String owner, String name, String descriptor, boolean isInterface) {
-                        if (methodName.equals("standardVoltageChargeable")) {
-                            STANDARD_VOLTAGE_ILLEGAL_INSN = true;
-                        } else if (methodName.equals("highVoltageChargeable")) {
-                            HIGH_VOLTAGE_ILLEGAL_INSN = true;
-                        }
-                        super.visitMethodInsn(opcode, owner, name, descriptor, isInterface);
-                    }
-                };
-            } else {
-                return super.visitMethod(access, name, descriptor, signature, exceptions);
-            }
-        }
-    };
-
     public static boolean LET_ME_MOVE_INVOKED = false;
     public static final Function<ClassWriter, ClassVisitor> LET_ME_MOVE_TRANSFORMER = writer -> new ClassVisitor(ASM9, writer) {
         @Override
