@@ -156,9 +156,10 @@ public class TutorTests_H_3_2 {
                 "currentCharge does not match the expected value");
         }
 
+        String className = H05_Tester.ELECTRIC_BOAT_CT.get().findClass().getName();
         H3_2_Transformers.LET_ME_MOVE_INVOKED = false;
         testCycle.getClassLoader()
-            .visitClass("h05.ElectricBoat", new ClassTransformerTemplate("", H3_2_Transformers.LET_ME_MOVE_TRANSFORMER));
+            .visitClass(className, new ClassTransformerTemplate(className, H3_2_Transformers.LET_ME_MOVE_TRANSFORMER));
         if (!H3_2_Transformers.LET_ME_MOVE_INVOKED) {
             fail(emptyContext(), result -> "Method letsGo did not invoke letMeMove");
         }
@@ -317,8 +318,9 @@ public class TutorTests_H_3_2 {
     @ExtendWith(TestCycleResolver.class)
     public void test_constructor_calls_setSpecificType(TestCycle testCycle) {
         H3_2_Transformers.SET_SPECIFIC_TYPE_INVOKED = false;
+        String className = H05_Tester.ELECTRIC_BOAT_CT.get().findClass().getName();
         testCycle.getClassLoader()
-            .visitClass("h05.ElectricBoat", new ClassTransformerTemplate("", H3_2_Transformers.SET_SPECIFIC_TYPE_TRANSFORMER));
+            .visitClass(className, new ClassTransformerTemplate(className, H3_2_Transformers.SET_SPECIFIC_TYPE_TRANSFORMER));
 
         assertTrue(H3_2_Transformers.SET_SPECIFIC_TYPE_INVOKED, emptyContext(), result ->
             "Method setSpecificType was not invoked in constructor of ElectricBoat");

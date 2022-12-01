@@ -129,7 +129,7 @@ public class TutorTests_H_3_3 {
     @ExtendWith(TestCycleResolver.class)
     public void test_HybridType2_forwarding(TestCycle testCycle) {
         H3_3_Transformers.MAP.replaceAll((s, b) -> false);
-        String className = "h05.HybridType2";
+        String className = H05_Tester.HYBRID_TYPE_2_CT.get().findClass().getName();
         testCycle.getClassLoader().visitClass(className, new ClassTransformerTemplate(className, H3_3_Transformers.TRANSFORMER));
         for (String methodSignature : H3_3_Transformers.MAP.keySet()) {
             assertTrue(H3_3_Transformers.MAP.get(methodSignature), emptyContext(), result ->
