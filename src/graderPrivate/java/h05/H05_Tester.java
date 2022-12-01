@@ -99,7 +99,7 @@ public class H05_Tester {
         minSim,
         Modifier.PROTECTED,
         TRANSPORT_TYPE_CT.get().findClass());
-    public static final Supplier<ParameterMatcher[]> FUEL_DRIVEN_VEHICLE_CONSTRUCTOR_PARAMETER_MATCHERS = () -> new ParameterMatcher[] {
+    public static final Supplier<ParameterMatcher[]> FUEL_DRIVEN_VEHICLE_CONSTRUCTOR_PARAMETER_MATCHERS = () -> new ParameterMatcher[]{
         new ParameterMatcher("fuelType", minSim, FUEL_TYPE_CT.get().findClass()),
         new ParameterMatcher("transportType", minSim, TRANSPORT_TYPE_CT.get().findClass()),
         new ParameterMatcher("fillingLevel", minSim, int.class)
@@ -141,7 +141,7 @@ public class H05_Tester {
         void.class,
         List.of(new ParameterMatcher("fillValue", minSim, int.class)));
     // H3.2
-    public static final Supplier<ClassTester<?>> ELECTRIC_BOAT_CT = () ->  new ClassTester<>("h05",
+    public static final Supplier<ClassTester<?>> ELECTRIC_BOAT_CT = () -> new ClassTester<>("h05",
         "ElectricBoat",
         minSim,
         Modifier.PUBLIC,
@@ -150,15 +150,15 @@ public class H05_Tester {
             new IdentifierMatcher("ElectricallyDriven", "h05", minSim),
             new IdentifierMatcher("IntSupplier", "java.util.function", minSim)
         )));
-    public static final Supplier<AttributeMatcher> ELECTRIC_BOAT_SPECIFIC_TYPE_AM = () ->  new AttributeMatcher("specificType",
+    public static final Supplier<AttributeMatcher> ELECTRIC_BOAT_SPECIFIC_TYPE_AM = () -> new AttributeMatcher("specificType",
         minSim,
         Modifier.PRIVATE,
         byte.class);
-    public static final Supplier<AttributeMatcher> ELECTRIC_BOAT_CURRENT_CHARGE_AM = () ->  new AttributeMatcher("currentCharge",
+    public static final Supplier<AttributeMatcher> ELECTRIC_BOAT_CURRENT_CHARGE_AM = () -> new AttributeMatcher("currentCharge",
         minSim,
         Modifier.PRIVATE,
         int.class);
-    public static final Supplier<AttributeMatcher> ELECTRIC_BOAT_CAPACITY_AM = () ->  new AttributeMatcher("capacity",
+    public static final Supplier<AttributeMatcher> ELECTRIC_BOAT_CAPACITY_AM = () -> new AttributeMatcher("capacity",
         minSim,
         Modifier.PRIVATE,
         int.class);
@@ -168,7 +168,17 @@ public class H05_Tester {
         Modifier.PUBLIC,
         byte.class,
         List.of(new ParameterMatcher("specificType", minSim, byte.class)));
-    public static final Supplier<ParameterMatcher[]> ELECTRIC_BOAT_CONSTRUCTOR_PARAMETER_MATCHERS = () -> new ParameterMatcher[] {
+    public static final Supplier<MethodTester> ELECTRIC_BOAT_STANDARD_VOLTAGE_CHARGEABLE_MT = () -> new MethodTester(ELECTRIC_BOAT_CT.get(),
+        "standardVoltageChargeable",
+        minSim,
+        boolean.class,
+        new ArrayList<>());
+    public static final Supplier<MethodTester> ELECTRIC_BOAT_HIGH_VOLTAGE_CHARGEABLE_MT = () -> new MethodTester(ELECTRIC_BOAT_CT.get(),
+        "highVoltageChargeable",
+        minSim,
+        boolean.class,
+        new ArrayList<>());
+    public static final Supplier<ParameterMatcher[]> ELECTRIC_BOAT_CONSTRUCTOR_PARAMETER_MATCHERS = () -> new ParameterMatcher[]{
         new ParameterMatcher("specificType", minSim, byte.class),
         new ParameterMatcher("currentCharge", minSim, int.class),
         new ParameterMatcher("capacity", minSim, int.class)
@@ -244,7 +254,7 @@ public class H05_Tester {
         minSim,
         Modifier.PRIVATE,
         HYBRID_TYPE_1_CT.get().findClass());
-    public static final Supplier<ParameterMatcher[]> HYBRID_TYPE_2_CONSTRUCTOR_PARAMETER_MATCHERS = () -> new ParameterMatcher[] {};
+    public static final Supplier<ParameterMatcher[]> HYBRID_TYPE_2_CONSTRUCTOR_PARAMETER_MATCHERS = () -> new ParameterMatcher[]{};
 
 
     //H3.4

@@ -4,23 +4,45 @@ import h05.transform.ClassTransformerTemplate;
 import h05.transform.H3_2_Transformers;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.opentest4j.AssertionFailedError;
 import org.sourcegrade.jagr.api.rubric.TestForSubmission;
 import org.sourcegrade.jagr.api.testing.SourceFile;
 import org.sourcegrade.jagr.api.testing.TestCycle;
 import org.sourcegrade.jagr.api.testing.extension.TestCycleResolver;
 import org.tudalgo.algoutils.reflect.ClassTester;
 import org.tudalgo.algoutils.tutor.general.assertions.Context;
+import org.tudalgo.algoutils.tutor.general.assertions.expected.ExpectedObject;
+import spoon.Launcher;
+import spoon.reflect.code.CtComment;
+import spoon.reflect.code.CtConditional;
+import spoon.reflect.code.CtStatement;
+import spoon.reflect.declaration.CtClass;
+import spoon.reflect.declaration.CtElement;
+import spoon.reflect.declaration.CtMethod;
+import spoon.reflect.declaration.CtParameter;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
+import java.util.List;
+import java.util.function.Function;
 import java.util.function.IntSupplier;
-import java.util.regex.Pattern;
+import java.util.stream.Collectors;
 
 import static org.tudalgo.algoutils.tutor.general.assertions.Assertions2.*;
 
 @TestForSubmission
 public class TutorTests_H_3_2 {
+
+    private static CtClass<?> electricBoatCtClass;
+
+    private static CtClass<?> getElectricBoatCtClass(TestCycle testCycle) {
+        if (electricBoatCtClass != null) {
+            return electricBoatCtClass;
+        }
+
+        String className = H05_Tester.ELECTRIC_BOAT_CT.get().verify().findClass().getName().replace(".", "/");
+        SourceFile sourceFile = testCycle.getSubmission().getSourceFile(className + ".java");
+        return electricBoatCtClass = Launcher.parseClass(sourceFile.getContent());
+    }
 
     @Test
     public void test_class() {
@@ -71,34 +93,32 @@ public class TutorTests_H_3_2 {
     @Test
     @ExtendWith(TestCycleResolver.class)
     public void test_chargeable_return(TestCycle testCycle) {
-        SourceFile sourceFile = testCycle.getSubmission().getSourceFile("h05/ElectricBoat.java");
-        if (sourceFile == null) {
-            throw new AssertionFailedError("Source file h05/ElectricBoat.java was not found in submission");
-        }
+        CtClass<?> ctClass = getElectricBoatCtClass(testCycle);
+        String standardVoltageChargeableMethodName = H05_Tester.ELECTRIC_BOAT_STANDARD_VOLTAGE_CHARGEABLE_MT
+            .get().resolveMethod().getName();
+        String highVoltageChargeableMethodName = H05_Tester.ELECTRIC_BOAT_HIGH_VOLTAGE_CHARGEABLE_MT
+            .get().resolveMethod().getName();
+        List<CtElement> standardVoltageChargeableElements = ctClass.getMethodsByName(standardVoltageChargeableMethodName).stream()
+            .filter(ctMethod -> ctMethod.getParameters().size() == 0)
+            .findAny()
+            .get()
+            .getBody()
+            .getElements(element -> element instanceof CtStatement
+                && !(element instanceof CtComment)
+                && !(element.getParent() instanceof CtMethod<?>));
+        List<CtElement> highVoltageChargeableElements = ctClass.getMethodsByName(highVoltageChargeableMethodName).stream()
+            .filter(ctMethod -> ctMethod.getParameters().size() == 0)
+            .findAny()
+            .get()
+            .getBody()
+            .getElements(element -> element instanceof CtStatement
+                && !(element instanceof CtComment)
+                && !(element.getParent() instanceof CtMethod<?>));
 
-        String submissionContent = sourceFile.getContent();
-        boolean b1 = Pattern.compile(".*standardVoltageChargeable\\s*?\\(\\s*?\\)\\s*?\\{\\s*?return.*?;\\s*?}.*")
-            .matcher(submissionContent)
-            .find();
-        boolean b2 = Pattern.compile(".*highVoltageChargeable\\s*?\\(\\s*?\\)\\s*?\\{\\s*?return.*?;\\s*?}.*")
-            .matcher(submissionContent)
-            .find();
-
-        assertTrue(b1, emptyContext(), result ->
-            "Method standardVoltageChargeable does not have exactly one statement (a single return statement)");
-        assertTrue(b2, emptyContext(), result ->
-            "Method highVoltageChargeable does not have exactly one statement (a single return statement)");
-
-        H3_2_Transformers.STANDARD_VOLTAGE_ILLEGAL_INSN = false;
-        H3_2_Transformers.HIGH_VOLTAGE_ILLEGAL_INSN = false;
-
-        testCycle.getClassLoader().visitClass("h05.ElectricBoat", new ClassTransformerTemplate("", H3_2_Transformers.CHARGEABLE_TRANSFORMER));
-        if (H3_2_Transformers.STANDARD_VOLTAGE_ILLEGAL_INSN) {
-            fail(emptyContext(), result -> "Illegal instructions used in method standardVoltageChargeable");
-        }
-        if (H3_2_Transformers.HIGH_VOLTAGE_ILLEGAL_INSN) {
-            fail(emptyContext(), result -> "Illegal instructions used in method highVoltageChargeable");
-        }
+        assertEquals(1, standardVoltageChargeableElements.size(), emptyContext(), result ->
+            "Method %s has more than one statement".formatted(standardVoltageChargeableMethodName));
+        assertEquals(1, highVoltageChargeableElements.size(), emptyContext(), result ->
+            "Method %s has more than one statement".formatted(highVoltageChargeableMethodName));
     }
 
     @Test
@@ -224,16 +244,24 @@ public class TutorTests_H_3_2 {
     @Test
     @ExtendWith(TestCycleResolver.class)
     public void test_setSpecificType_no_ternary(TestCycle testCycle) {
-        SourceFile sourceFile = testCycle.getSubmission().getSourceFile("h05/ElectricBoat.java");
-        if (sourceFile == null) {
-            throw new AssertionFailedError("Source file h05/ElectricBoat.java was not found in submission");
-        }
+        CtClass<?> ctClass = getElectricBoatCtClass(testCycle);
+        String methodName = H05_Tester.ELECTRIC_BOAT_SET_SPECIFIC_TYPE_MT.get().verify().resolveMethod().getName();
+        List<CtElement> ternaryElements = ctClass.getMethodsByName(methodName).stream()
+            .filter(ctMethod -> {
+                List<CtParameter<?>> parameters = ctMethod.getParameters();
+                return parameters.size() == 1 && parameters.get(0).getType().getQualifiedName().equals("byte");
+            })
+            .findAny()
+            .get()
+            .getElements(element -> element instanceof CtConditional<?>);
 
-        boolean ternaryUsed = Pattern.compile(".*setSpecificType\\s*?\\(.*?\\)\\s*?\\{[^}]*?\\?[^}]*?:[^}]*?}.*")
-            .matcher(sourceFile.getContent())
-            .find();
-        assertFalse(ternaryUsed, emptyContext(), result ->
-            "Ternary operator used in setSpecificType");
+        testOfObjectBuilder()
+            .expected(ExpectedObject.of("0 occurrences", o -> o instanceof Integer i && i == 0, Function.identity()))
+            .build()
+            .run(ternaryElements.size())
+            .check(emptyContext(), result -> "Ternary operator used in line " + ternaryElements.stream()
+                .map(ctElement -> String.valueOf(ctElement.getPosition().getLine()))
+                .collect(Collectors.joining(", ")));
     }
 
 
