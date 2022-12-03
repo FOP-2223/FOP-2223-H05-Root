@@ -281,7 +281,7 @@ public class TutorTests_H_3_2 {
 
         Object instance = constructor.newInstance((byte) 0, currentCharge, capacity);
 
-        int expected_capacity = Math.min(0, capacity);
+        int expected_capacity = Math.max(0, capacity);
         int expected_currentCharge = Math.min(expected_capacity, Math.max(0, currentCharge));
         Object expected_transportType = null;
 
