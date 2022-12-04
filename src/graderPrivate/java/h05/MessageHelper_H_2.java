@@ -11,7 +11,7 @@ public class MessageHelper_H_2 {
     }
 
     public static boolean matchesUndefined(String s) {
-        return s.matches("^I am (a|an) undefined\\.$");
+        return s.matches("^I am (a|an) [u|U]ndefined\\.$");
     }
 
     private static String toNoun(String s) {
