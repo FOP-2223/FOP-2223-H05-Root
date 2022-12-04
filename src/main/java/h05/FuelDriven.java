@@ -1,5 +1,8 @@
 package h05;
 
+/**
+ * Represents something which is driven by fuel
+ */
 public interface FuelDriven {
     /**
      * @return the FuelType of the Vehicle

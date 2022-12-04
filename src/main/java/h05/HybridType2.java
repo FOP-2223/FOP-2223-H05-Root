@@ -1,5 +1,8 @@
 package h05;
 
+/**
+ * Defines a HybridVehicle
+ */
 public class HybridType2 extends MeansOfTransport implements FuelDriven, ElectricallyDriven {
 
     private HybridType1 hybridObject;

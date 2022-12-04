@@ -1,5 +1,8 @@
 package h05;
 
+/**
+ * Represents the Means of all transportTypes
+ */
 abstract public class MeansOfTransport {
     final private char[] VOWELS = new char[]{'A', 'E', 'I', 'O', 'U'};
 

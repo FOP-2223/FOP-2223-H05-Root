@@ -1,5 +1,8 @@
 package h05;
 
+/**
+ * Represents something which is driven by Electricity
+ */
 public interface ElectricallyDriven {
     /**
      * @return true, if the Vehicle can be charged with Standard Voltage Level
