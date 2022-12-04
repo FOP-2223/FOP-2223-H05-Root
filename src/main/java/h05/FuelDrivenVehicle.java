@@ -1,10 +1,19 @@
 package h05;
 
+/**
+ * Represents a Vehicle which is driven by fuel
+ */
 public class FuelDrivenVehicle extends MeansOfTransport implements FuelDriven {
 
     private FuelType fuelType;
     private int fillingLevel;
 
+    /**
+     * Creates a Vehicle which is fuel driven
+     * @param fuelType Concrete FuelType of the Vehicle
+     * @param transportType Specific TransportType of the Vehicle
+     * @param fillingLevel defines the initial fillingLevel at creation
+     */
     public FuelDrivenVehicle(FuelType fuelType, TransportType transportType, int fillingLevel) {
         this.fuelType = fuelType;
         this.transportType = transportType;
@@ -27,10 +36,18 @@ public class FuelDrivenVehicle extends MeansOfTransport implements FuelDriven {
         }
     }
 
+    /**
+     *
+     * @return the current fillingLevel
+     */
     public int getFillingLevel() {
         return fillingLevel;
     }
 
+    /**
+     *
+     * @param fillValue to add to the fillingLevel
+     */
     public void fillUp(int fillValue) {
         if (fillValue > 0) {
             fillingLevel += fillValue;

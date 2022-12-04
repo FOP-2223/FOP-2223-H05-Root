@@ -2,16 +2,25 @@ package h05;
 
 import java.util.function.IntSupplier;
 
+/**
+ * Represents a Boat, which is driven by an electric motor
+ */
 public class ElectricBoat extends MeansOfTransport implements ElectricallyDriven, IntSupplier {
     private byte specificType;
     private int currentCharge;
     private int capacity;
 
+    /**
+     * Constructs a Electric Boat with given specifications
+     * @param specificType the type of the Boat, which defines the possible charging methods
+     * @param currentCharge the Charge of the Boat at creation
+     * @param capacity the max capacity of the batteries of the electric boat
+     */
     public ElectricBoat(byte specificType, int currentCharge, int capacity) {
         setSpecificType(specificType);
         transportType = TransportType.VESSEL;
 
-        this.capacity = Math.min(0, capacity);
+        this.capacity = Math.max(0, capacity);
         this.currentCharge = Math.min(this.capacity, Math.max(0, currentCharge));
     }
 

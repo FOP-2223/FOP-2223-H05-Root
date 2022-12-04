@@ -1,5 +1,8 @@
 package h05;
 
+/**
+ * Defines a HybridVehicle
+ */
 public class HybridType3 implements HybridVehicle {
 
     private static FuelType fuelType;
@@ -34,7 +37,7 @@ public class HybridType3 implements HybridVehicle {
      * @param fuelType value to set fuelType to
      */
     public void setFuelType(FuelType fuelType) {
-        this.fuelType = fuelType;
+        HybridType3.fuelType = fuelType;
     }
 
     @Override
@@ -48,7 +51,7 @@ public class HybridType3 implements HybridVehicle {
      * @param averageConsumption value to set averageConsumption to
      */
     public void setAverageConsumption(double averageConsumption) {
-        this.averageConsumption = averageConsumption;
+        HybridType3.averageConsumption = averageConsumption;
     }
 
     /**
