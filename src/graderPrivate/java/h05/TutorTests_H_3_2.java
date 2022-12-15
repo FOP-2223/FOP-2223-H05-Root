@@ -145,7 +145,7 @@ public class TutorTests_H_3_2 {
 
             H05_Tester.ELECTRICALLY_DRIVEN_LETS_GO_MT.get().resolveMethod().invoke(instance, additionalChargeVolume_TV[i], 0);
 
-            int expected_currentCharge = Math.min(capacity_TV[i], currentCharge_TV[i] + additionalChargeVolume_TV[i]);
+            int expected_currentCharge = capacity_TV[i];
             int actual_currentCharge = (int) currentCharge_field.get(instance);
 
             Context context = contextBuilder()
@@ -166,22 +166,22 @@ public class TutorTests_H_3_2 {
     }
 
 
-    private void singleLetMeMoveTest(int currentCharge, int distance) throws IllegalAccessException, InvocationTargetException {
+    private void singleLetMeMoveTest() throws IllegalAccessException, InvocationTargetException {
         Field currentCharge_field = H05_Tester.ELECTRIC_BOAT_CT
             .get().resolve().resolveAttribute(H05_Tester.ELECTRIC_BOAT_CURRENT_CHARGE_AM.get());
         currentCharge_field.trySetAccessible();
         Object instance = H05_Tester.ELECTRIC_BOAT_CT.get().assureClassResolved().resolveInstance();
 
-        currentCharge_field.set(instance, currentCharge);
-        int actual_return = (int) H05_Tester.MEANS_OF_TRANSPORT_LET_ME_MOVE_MT.get().resolveMethod().invoke(instance, distance);
+        currentCharge_field.set(instance, 10);
+        int actual_return = (int) H05_Tester.MEANS_OF_TRANSPORT_LET_ME_MOVE_MT.get().resolveMethod().invoke(instance, 10);
         int actual_currentCharge = (int) currentCharge_field.get(instance);
 
-        int expected_currentCharge = Math.max(0, currentCharge - Math.min(distance / 100, 1));
-        int expected_return = currentCharge - expected_currentCharge;
+        int expected_currentCharge = Math.max(0, 10);
+        int expected_return = 0;
 
         Context context = contextBuilder()
-            .add("currentCharge", currentCharge)
-            .add("distance", distance)
+            .add("currentCharge", 10)
+            .add("distance", 10)
             .build();
         assertEquals(expected_currentCharge, actual_currentCharge, context, result ->
             "currentCharge is not calculated correctly");
@@ -192,11 +192,11 @@ public class TutorTests_H_3_2 {
 
     @Test
     public void test_letMeMove() throws InvocationTargetException, IllegalAccessException {
-        singleLetMeMoveTest(10, 10);
+        singleLetMeMoveTest();
     }
 
     @Test
-    public void test_getAsInt() throws InvocationTargetException, IllegalAccessException {
+    public void test_getAsInt() {
         var electric_boat = H05_Tester.ELECTRIC_BOAT_CT.get().resolve();
         Field currentCharge_field = electric_boat.resolveAttribute(H05_Tester.ELECTRIC_BOAT_CURRENT_CHARGE_AM.get());
         Field capacity_field = electric_boat.resolveAttribute(H05_Tester.ELECTRIC_BOAT_CAPACITY_AM.get());
@@ -283,7 +283,6 @@ public class TutorTests_H_3_2 {
 
         int expected_capacity = Math.max(0, capacity);
         int expected_currentCharge = Math.min(expected_capacity, Math.max(0, currentCharge));
-        Object expected_transportType = null;
 
         int actual_capacity = (int) capacity_field.get(instance);
         int actual_currentCharge = (int) currentCharge_field.get(instance);

@@ -152,7 +152,7 @@ public class H05_RubricProvider implements RubricProvider {
         JUnitTestRef.ofMethod(() -> TutorTests_H_3_2.class.getMethod("test_attributes")));
 
     public static final Criterion H3_2_T3 = makeSimpleCriterion(
-        "Die Klasse [[[ElectricBoat]]] setzt die Methoden [[[standardVoltageChargable]]] und [[[highVoltageChargable]]] korrekt um.",
+        "Die Klasse [[[ElectricBoat]]] setzt die Methoden [[[standardVoltageChargeable]]] und [[[highVoltageChargeable]]] korrekt um.",
         JUnitTestRef.ofMethod(() -> TutorTests_H_3_2.class.getMethod("test_chargeable")),
         JUnitTestRef.ofMethod(() -> TutorTests_H_3_2.class.getMethod("test_chargeable_return", TestCycle.class)));
 

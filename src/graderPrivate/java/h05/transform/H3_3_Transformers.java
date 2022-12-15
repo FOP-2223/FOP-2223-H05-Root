@@ -12,7 +12,7 @@ import static org.objectweb.asm.Opcodes.*;
 
 public class H3_3_Transformers {
 
-    public static Map<String, Boolean> MAP = new HashMap<>(Map.of(
+    public static final Map<String, Boolean> MAP = new HashMap<>(Map.of(
         "standardVoltageChargeable()Z", false,
         "highVoltageChargeable()Z", false,
         "letsGo(BI)V", false,
